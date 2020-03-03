@@ -43,13 +43,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MaxValue.cs" />
-    <Compile Include="PolishNotation.cs" />
+    <Compile Include="Mod1\MaxValue.cs" />
+    <Compile Include="Mod1\PolishNotation.cs" />
+    <Compile Include="Mod3\BFS.cs" />
+    <Compile Include="Mod3\Dijkstra.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Mod2\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Algorytmy.Mod3;
 
 namespace Algorytmy
 {
@@ -10,9 +11,8 @@ namespace Algorytmy
     {
         static void Main(string[] args)
         {
-            PolishNotation a = new PolishNotation();
-            a.ConvertNotation();
-            a.Reverse();
+            Dijkstra t = new Dijkstra();
+            t.Init();
             Console.ReadLine();
 
         }
