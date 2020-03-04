@@ -1,0 +1,3 @@
+DROP DATABASE IF EXISTS znajomi;
+CREATE DATABASE znajomi;
+USE znajomi;

@@ -1,0 +1,9 @@
+SOURCE D:/Documents/Code/University/BazyDanych/TableOsoby.sql
+
+SOURCE D:/Documents/Code/University/BazyDanych/RemoveCreate.sql
+
+SOURCE D:/Documents/Code/University/BazyDanych/TableTelefony.sql
+
+mysqldump -u root znajomi>plik.sql
+
+
