@@ -45,6 +45,9 @@
   <ItemGroup>
     <Compile Include="Mod1\MaxValue.cs" />
     <Compile Include="Mod1\PolishNotation.cs" />
+    <Compile Include="Mod2\PQueque.cs" />
+    <Compile Include="Mod2\Queque.cs" />
+    <Compile Include="Mod2\Stack.cs" />
     <Compile Include="Mod3\BFS.cs" />
     <Compile Include="Mod3\Dijkstra.cs" />
     <Compile Include="Program.cs" />
@@ -53,8 +56,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Mod2\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

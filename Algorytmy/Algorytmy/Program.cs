@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Algorytmy.Mod3;
+using Algorytmy.Mod2;
 
 namespace Algorytmy
 {
@@ -11,8 +11,17 @@ namespace Algorytmy
     {
         static void Main(string[] args)
         {
-            Dijkstra t = new Dijkstra();
-            t.Init();
+            PQueque que = new PQueque(3);
+
+            que.Enqueue(3);
+            que.Enqueue(1);
+            que.Enqueue(5);
+            que.Print();
+            Console.WriteLine(que.Dequeue());
+            que.Print();
+
+            que.Print();
+            Console.WriteLine(que.Count());
             Console.ReadLine();
 
         }
