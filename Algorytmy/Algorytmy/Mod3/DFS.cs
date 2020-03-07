@@ -6,20 +6,21 @@ using System.Threading.Tasks;
 
 namespace Algorytmy.Mod3
 {
-    class BFS
+    class DFS
     {
+
         int V = 9;
         public void Init()
         {
 
             int[,] graph = new int[,] { { 0, 4, 0, 0, 0, 0, 0, 8, 0 },
-                                        { 4, 0, 8, 0, 0, 0, 0, 11, 0 },
+                                        { 4, 0, 8, 0, 0, 0, 0, 9, 0 },
                                         { 0, 8, 0, 7, 0, 4, 0, 0, 2 },
-                                        { 0, 0, 7, 0, 9, 14, 0, 0, 0 },
-                                        { 0, 0, 0, 9, 0, 10, 0, 0, 0 },
-                                        { 0, 0, 4, 14, 10, 0, 2, 0, 0 },
+                                        { 0, 0, 7, 0, 9, 9, 0, 0, 0 },
+                                        { 0, 0, 0, 9, 0, 9, 0, 0, 0 },
+                                        { 0, 0, 4, 9, 9, 0, 2, 0, 0 },
                                         { 0, 0, 0, 0, 0, 2, 0, 1, 6 },
-                                        { 8, 11, 0, 0, 0, 0, 1, 0, 7 },
+                                        { 8, 9, 0, 0, 0, 0, 1, 0, 7 },
                                         { 0, 0, 2, 0, 0, 0, 6, 7, 0 } };
 
 
@@ -32,34 +33,33 @@ namespace Algorytmy.Mod3
         {
             bool[] visited = new bool[V];
 
-            Queue<int> queue = new Queue<int>();
+            Stack<int> stack = new Stack<int>();
 
             visited[src] = true;
-            queue.Enqueue(src);
+            stack.Push(src);
 
-            while (queue.Count() != 0)
+            while (stack.Count() != 0)
             {
-                src = queue.Dequeue();
+                src = stack.Peek();
                 Console.WriteLine(src);
 
                 for (int i = 0; i < V; i++)
                 {
                     if (graph[src, i] > 0 && !visited[i])
                     {
-                        queue.Enqueue(i);
+                        stack.Push(i);
                         visited[i] = true;
-                    } 
+                        break;
+                    }
                 }
+
+                if (src == stack.Peek()) stack.Pop();
 
             }
 
 
 
-        }
+        
     }
 }
-
-//https://www.geeksforgeeks.org/breadth-first-search-or-bfs-for-a-graph/
-//https://www.geeksforgeeks.org/depth-first-search-or-dfs-for-a-graph/
-//https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-greedy-algo-7/
-//https://www.geeksforgeeks.org/floyd-warshall-algorithm-dp-16/
+}

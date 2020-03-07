@@ -49,7 +49,9 @@
     <Compile Include="Mod2\Queque.cs" />
     <Compile Include="Mod2\Stack.cs" />
     <Compile Include="Mod3\BFS.cs" />
+    <Compile Include="Mod3\DFS.cs" />
     <Compile Include="Mod3\Dijkstra.cs" />
+    <Compile Include="Mod3\Floyd.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
