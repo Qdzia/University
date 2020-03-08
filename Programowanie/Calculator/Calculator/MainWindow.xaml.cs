@@ -125,5 +125,30 @@ namespace Calculator
         {
             diplayWindow.Text = cal.AddNumber(',');
         }
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            string str ="";
+            if (e.Key == Key.NumPad1) str = cal.AddNumber('1');
+            else if (e.Key == Key.NumPad2) str = cal.AddNumber('2');
+            else if (e.Key == Key.NumPad3) str = cal.AddNumber('3');
+            else if (e.Key == Key.NumPad4) str = cal.AddNumber('4');
+            else if (e.Key == Key.NumPad5) str = cal.AddNumber('5');
+            else if (e.Key == Key.NumPad6) str = cal.AddNumber('6');
+            else if (e.Key == Key.NumPad7) str = cal.AddNumber('7');
+            else if (e.Key == Key.NumPad8) str = cal.AddNumber('8');
+            else if (e.Key == Key.NumPad9) str = cal.AddNumber('9');
+            else if (e.Key == Key.NumPad0) str = cal.AddNumber('0');
+            else if (e.Key == Key.Decimal) str = cal.AddNumber(',');
+            if (str != "") {
+                diplayWindow.Text = str;
+                return;
+            }
+            
+            if (e.Key == Key.Multiply) cal.Action('*');
+            else if (e.Key == Key.Divide) cal.Action('/');
+            else if (e.Key == Key.Add) cal.Action('+');
+            else if (e.Key == Key.Subtract) cal.Action('-');
+            if (e.Key == Key.Enter) diplayWindow.Text = cal.Equals();
+        }
     }
 }
