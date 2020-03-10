@@ -7,6 +7,62 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition  Width="1*"/>
+            <ColumnDefinition  Width="1*"/>
+            <ColumnDefinition  Width="6*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+
+        <TextBox x:Name="name"
+                 TextAlignment="Left" 
+                 VerticalAlignment="Center" 
+                 GotFocus="tb_GotFocus"
+                 LostFocus="tb_LostFocus"
+                 FontSize="15" 
+                 Foreground="DimGray" 
+                 Grid.Column="1" 
+                 Grid.Row="1" 
+                 Grid.ColumnSpan="2" 
+                 Margin="5"
+                 >Podaj imię
+        </TextBox>
+
+        <Label FontSize="15" VerticalAlignment="Center" 
+               Grid.Column="0" Grid.Row="1" Content="Imię: " />
+
+
+        <TextBox TextAlignment="Left" 
+                 VerticalAlignment="Center" 
+                 GotFocus="tb_GotFocus"
+                 LostFocus="tb_LostFocus"
+                 FontSize="15" 
+                 Foreground="DimGray" 
+                 Grid.Column="1" 
+                 Grid.Row="2" 
+                 Grid.ColumnSpan="2" 
+                 Margin="5"
+                 >Podaj nazwisko
+        </TextBox>
+
+        <Label FontSize="15" VerticalAlignment="Center" 
+               Grid.Column="0" Grid.Row="2" Content="Nazwisko: " />
+
+        <ComboBox Grid.Column="1" 
+                  Grid.Row="3"
+                  Margin="7"
+                  />
+
+        <Label FontSize="15" VerticalAlignment="Center" 
+               Grid.Column="0" Grid.Row="3" Content="Waga: " />
+
     </Grid>
 </Window>
