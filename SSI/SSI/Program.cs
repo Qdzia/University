@@ -15,8 +15,8 @@ namespace SSI
 
             //rd.ReadFlower();
             //rd.PrintData();
-            ghp.ToGrayScale();
-            Console.ReadLine();
+            ghp.Filtr();
+            //Console.ReadLine();
         }
     }
 }
