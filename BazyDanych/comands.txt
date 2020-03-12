@@ -6,4 +6,6 @@ SOURCE D:/Documents/Code/University/BazyDanych/TableTelefony.sql
 
 mysqldump -u root znajomi>plik.sql
 
+ALTER TABLE osoby ADD wiek tinyint unsigned AFTER nazwisko
+
 

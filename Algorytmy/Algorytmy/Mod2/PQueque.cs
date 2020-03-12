@@ -55,7 +55,7 @@ namespace Algorytmy.Mod2
                 int tmp = first;
                 first = -1;
                 last = -1;
-                return tab[tmp];
+                return 5;
             }
             else
             {

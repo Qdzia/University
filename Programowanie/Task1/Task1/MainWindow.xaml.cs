@@ -24,5 +24,30 @@ namespace Task1
         {
             InitializeComponent();
         }
+
+        private void tb_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tb = sender as TextBox;
+            tb.Text = "";
+        }
+        
+        private void tb_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tb = sender as TextBox;
+            if (tb.Text == "")
+            {
+                if (tb.Name == "name") tb.Text = "Podaj imię";
+                else tb.Text = "Podaj nazwisko";
+                tb.BorderThickness = new Thickness(3);
+                tb.BorderBrush = Brushes.Red;
+            }
+            else
+            {
+                tb.BorderThickness = new Thickness(1);
+                tb.BorderBrush = Brushes.Gray;
+
+            }
+                
+        }
     }
 }
