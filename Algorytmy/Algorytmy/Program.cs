@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Algorytmy.Mod2;
 using Algorytmy.Mod3;
+using Algorytmy.Mod6;
 
 namespace Algorytmy
 {
@@ -12,15 +13,10 @@ namespace Algorytmy
     {
         static void Main(string[] args)
         {
-            Dijkstra dij = new Dijkstra();
-            BFS bfs = new BFS();
-            DFS dfs = new DFS();
-            Floyd floyd = new Floyd();
+            Statistic st = new Statistic();
 
-            floyd.Init();
-
+            st.Analyze();
             Console.ReadLine();
-
         }
     }
 }
