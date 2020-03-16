@@ -31,18 +31,39 @@ namespace SSI
 
         }
 
-        public void Filtr()
+        public void Filtr(int choice)
         {
-            string path = @"../../data/img.jpg";
+            string path = @"../../data/car.jpg";
             Bitmap img = new Bitmap(path);
 
             Bitmap btmF = new Bitmap(img.Width, img.Height);
 
             double[][] kernel = new double[3][];
 
-            kernel[0] = new double[] { -1, -1, -1 };
-            kernel[1] = new double[] { -1,  8, -1 };
-            kernel[2] = new double[] { -1, -1, -1 };
+            if (choice == 0)
+            {
+                kernel[0] = new double[] { -1, -1, -1 };
+                kernel[1] = new double[] { -1,  8, -1 };
+                kernel[2] = new double[] { -1, -1, -1 };
+            }
+            else if (choice == 1)
+            {
+                kernel[0] = new double[] { 1, 2, 1 };
+                kernel[1] = new double[] { 2, 4, 2 };
+                kernel[2] = new double[] { 1, 2, 1 };
+            }
+            else if(choice == 2)
+            {
+                kernel[0] = new double[] { -1, -2, -1 };
+                kernel[1] = new double[] { -2, 16, -2 };
+                kernel[2] = new double[] { -1, -2, -1 };
+            }
+            else
+            {
+                kernel[0] = new double[] { 0, 0, 0 };
+                kernel[1] = new double[] { -5, 5, 0 };
+                kernel[2] = new double[] { 0, 0, 0 };
+            }
 
             double[] sum = new double[] { 0, 0, 0 };
 
@@ -55,40 +76,39 @@ namespace SSI
                 }
             }
 
-            for (int i = 1; i < btmF.Width-2; i++)
+            for (int i = 0; i < img.Width - kernel.Length; i++)
             {
-                for (int j = 1; j < btmF.Height-2; j++)
+                for (int j = 0; j < img.Height - kernel[0].Length; j++)
                 {
                     sum[0] = 0;
                     sum[1] = 0;
                     sum[2] = 0;
-                    for (int k = -1; k < 2; k++)
+                    for (int k = kernel.Length - 1; k > -1; k--)
                     {
-                        for (int l = -1; l < 2; l++)
+                        for (int l = kernel[0].Length - 1; l > -1; l--)
                         {
-                            Color pxl = img.GetPixel(i+k, j+l);
-                            sum[0] += pxl.R * kernel[k + 1][l + 1];
-                            sum[1] += pxl.G * kernel[k + 1][l + 1];
-                            sum[2] += pxl.B * kernel[k + 1][l + 1];
-
-                            if (weight != 0)
-                            {
-                                sum[0] = sum[0] / weight;
-                                sum[1] = sum[1] / weight;
-                                sum[2] = sum[2] / weight;
-                            }
-
-                            for (int m = 0; m < 3; m++)
-                            {
-                                if (sum[m] < 0) sum[m] = 0;
-                                if (sum[m] > 255) sum[m] = 255;
-                            }
-
-                            btmF.SetPixel(i+k, j+l, Color.FromArgb(1, (int)sum[0], (int)sum[1], (int)sum[2]));
+                            Color pxl = img.GetPixel(i + kernel.Length - 1 - k,j + kernel[0].Length - 1 - l);
+                            sum[0] += pxl.R * kernel[k][l];
+                            sum[1] += pxl.G * kernel[k][l];
+                            sum[2] += pxl.B * kernel[k][l];
                         }
                     }
 
-                    
+                    if (weight != 0)
+                    {
+                        sum[0] /= weight;
+                        sum[1] /= weight;
+                        sum[2] /= weight;
+                    }
+
+                    for (int m = 0; m < 3; m++)
+                    {
+                        if (sum[m] < 0) sum[m] = 0;
+                        if (sum[m] > 255) sum[m] = 255;
+                    }
+
+                    btmF.SetPixel(i, j, Color.FromArgb((int)sum[0], (int)sum[1], (int)sum[2]));
+
                 }
             }
 

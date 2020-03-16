@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +15,11 @@ namespace Algorytmy.Mod6
             //int[] arr2 = (int[])arr.Clone();
             //int[] arr3 = CreateArr(2000);
             int[] arr = CreateArr(20000);
-            Time(arr);
+            double[] results =  Time(arr);
+            foreach (double res in results)
+            {
+                Console.WriteLine(res);
+            }
 
         }
         int[] CreateArr(int num)
@@ -45,28 +50,42 @@ namespace Algorytmy.Mod6
             MergeSort m = new MergeSort();
             CountingSort c = new CountingSort();
 
+            Console.WriteLine("Licze...");
 
-            //q.Quick(arr, 0, n - 1);
-            //b.Bubble(arr);
-            //h.Sort(arr);
-            //s.Sort(arr);
-            //m.Sort(arr, 0, n - 1);
-            //c.Sort(arr, min, max);
-
-            var w0 = System.Diagnostics.Stopwatch.StartNew();
-            h.Sort((int[])arr.Clone());
-            w0.Stop();
-            results[0] = w0.ElapsedMilliseconds;
-
-            var w1 = System.Diagnostics.Stopwatch.StartNew();
+            var sw = Stopwatch.StartNew();
             b.Bubble((int[])arr.Clone());
-            w1.Stop();
-            results[1] = w1.ElapsedMilliseconds;
+            sw.Stop();
+            results[0] = sw.ElapsedMilliseconds;
 
-            Console.WriteLine(results[1]);
-            Console.WriteLine(results[0]);
+            sw.Restart();
+            q.Quick((int[])arr.Clone(), 0, n - 1);
+            sw.Stop();
+            results[1] = sw.ElapsedMilliseconds;
+
+            sw.Restart();
+            h.Sort((int[])arr.Clone());
+            sw.Stop();
+            results[2] = sw.ElapsedMilliseconds;
+
+            sw.Restart();
+            s.Sort((int[])arr.Clone());
+            sw.Stop();
+            results[3] = sw.ElapsedMilliseconds;
+
+            sw.Restart();
+            m.Sort((int[])arr.Clone(), 0, n - 1);
+            sw.Stop();
+            results[4] = sw.ElapsedMilliseconds;
+
+            sw.Restart();
+            c.Sort((int[])arr.Clone(), min, max);
+            sw.Stop();
+            results[5] = sw.ElapsedMilliseconds;
+
             return results;
         }
+
+        
 
     }
 }

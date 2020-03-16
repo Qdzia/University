@@ -8,7 +8,6 @@ namespace Task1
 {
     class test
     {
-
         void tak() {
 
             Player player = new Player("aa","aa",12,13.0);

@@ -12,11 +12,13 @@ namespace SSI
         {
             ReadData rd = new ReadData();
             Graphic ghp = new Graphic();
-
+            SoftSet ss = new SoftSet();
+            
+            ss.Start();
             //rd.ReadFlower();
             //rd.PrintData();
-            ghp.Filtr();
-            //Console.ReadLine();
+            //ghp.Filtr(3);
+            Console.ReadLine();
         }
     }
 }
