@@ -11,6 +11,7 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition  Width="1*"/>
             <ColumnDefinition  Width="1*"/>
+            <ColumnDefinition  Width="1*"/>
             <ColumnDefinition  Width="6*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -19,10 +20,13 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="5*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
 
-        <TextBox x:Name="name"
+        <TextBox x:Name="fn_tb"
                  TextAlignment="Left" 
                  VerticalAlignment="Center" 
                  GotFocus="tb_GotFocus"
@@ -36,11 +40,15 @@
                  >Podaj imię
         </TextBox>
 
+        <Label FontSize="15" VerticalAlignment="Center" Grid.ColumnSpan="4"
+               Grid.Column="0" Grid.Row="0" Content="Piłkarz Manager 2000" />
+        
         <Label FontSize="15" VerticalAlignment="Center" 
                Grid.Column="0" Grid.Row="1" Content="Imię: " />
 
 
-        <TextBox TextAlignment="Left" 
+        <TextBox x:Name="ln_tb"
+                 TextAlignment="Left" 
                  VerticalAlignment="Center" 
                  GotFocus="tb_GotFocus"
                  LostFocus="tb_LostFocus"
@@ -56,13 +64,61 @@
         <Label FontSize="15" VerticalAlignment="Center" 
                Grid.Column="0" Grid.Row="2" Content="Nazwisko: " />
 
-        <ComboBox Grid.Column="1" 
+        <ComboBox x:Name="age_cb"
+                  Grid.Column="1" 
                   Grid.Row="3"
                   Margin="7"
+                  SelectedIndex="0"
                   />
 
         <Label FontSize="15" VerticalAlignment="Center" 
-               Grid.Column="0" Grid.Row="3" Content="Waga: " />
+               Grid.Column="0" Grid.Row="3" Content="Wiek: " />
+
+        <Slider   x:Name="MySlider"
+                  Grid.Column="1" Grid.ColumnSpan="2" 
+                  Grid.Row="4"
+                  Margin="7" 
+                  Maximum="55" 
+                  Minimum="15" 
+                  TickFrequency="0.1"
+                  IsSnapToTickEnabled="True"
+                  Value="16"
+                  />
+        <Label FontSize="15" VerticalAlignment="Center" 
+               Grid.Column="0" Grid.Row="4" Content="Waga: " />
+        
+        <Label FontSize="15" VerticalAlignment="Center" x:Name="weightText"
+               Grid.Column="3" Grid.Row="4" 
+               Content="{Binding ElementName=MySlider, Path=Value, UpdateSourceTrigger=PropertyChanged}"
+               ContentStringFormat="{}{0:#,#.0} kg"
+               />
+
+        <Button Grid.Column="1" Grid.ColumnSpan="2"
+                Grid.Row="5"
+                Margin="10" 
+                Click="Add_Click"
+                >Dodaj
+        </Button>
+
+        <Button Grid.Column="1" Grid.ColumnSpan="2"
+                Grid.Row="6"
+                Margin="10" 
+                Click="Mod_Click"
+                >Modifikuj
+        </Button>
+
+        <Button Grid.Column="1" Grid.ColumnSpan="2"
+                Grid.Row="7"
+                Margin="10" 
+                Click="Del_Click"
+                >Usuń
+        </Button>
+
+        <ListBox x:Name="player_l"
+                 Grid.Column="4"
+                 Grid.Row="0" Grid.RowSpan="9"
+                 Margin="10"
+                 />
 
     </Grid>
 </Window>

@@ -32,7 +32,7 @@ namespace Calculator
             string str = string.Join("", chain);
             Match match = regex.Match(str);
 
-            if (match.Success)
+            if (match.Success && str != "00")
             {
                 num2 = Convert.ToDouble(str);
             }
@@ -46,15 +46,20 @@ namespace Calculator
 
         public void Action(char sg)
         {
-            if (chain.Count >0 && signChange == true)
+            if (chain.Count > 0 && signChange == true)
             {
                 num1 = num2;
                 num2 = 0;
                 chain.Clear();
                 signChange = false;
             }
-            if(sign != sg)
+            if (sign != sg)
                 sign = sg;
+            if (num1 == -1)
+            {
+                num1 = num2;
+                num2 = 0;
+            }
         }
 
         public string Equals()
@@ -66,7 +71,9 @@ namespace Calculator
                 else if (sign == '*') result = num1 * num2;
                 else if (sign == '/') result = num1 / num2;
                 num2 = result;
+                num1 = -1;
                 chain.Clear();
+                signChange = true;
                 return Convert.ToString(result);
             }
             return Convert.ToString(result);

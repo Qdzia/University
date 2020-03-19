@@ -128,16 +128,16 @@ namespace Calculator
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
             string str ="";
-            if (e.Key == Key.NumPad1) str = cal.AddNumber('1');
-            else if (e.Key == Key.NumPad2) str = cal.AddNumber('2');
-            else if (e.Key == Key.NumPad3) str = cal.AddNumber('3');
-            else if (e.Key == Key.NumPad4) str = cal.AddNumber('4');
-            else if (e.Key == Key.NumPad5) str = cal.AddNumber('5');
-            else if (e.Key == Key.NumPad6) str = cal.AddNumber('6');
-            else if (e.Key == Key.NumPad7) str = cal.AddNumber('7');
-            else if (e.Key == Key.NumPad8) str = cal.AddNumber('8');
-            else if (e.Key == Key.NumPad9) str = cal.AddNumber('9');
-            else if (e.Key == Key.NumPad0) str = cal.AddNumber('0');
+            if (e.Key == Key.NumPad1 || e.Key == Key.D1) str = cal.AddNumber('1');
+            else if (e.Key == Key.NumPad2 || e.Key == Key.D2) str = cal.AddNumber('2');
+            else if (e.Key == Key.NumPad3 || e.Key == Key.D3) str = cal.AddNumber('3');
+            else if (e.Key == Key.NumPad4 || e.Key == Key.D4) str = cal.AddNumber('4');
+            else if (e.Key == Key.NumPad5 || e.Key == Key.D5) str = cal.AddNumber('5');
+            else if (e.Key == Key.NumPad6 || e.Key == Key.D6) str = cal.AddNumber('6');
+            else if (e.Key == Key.NumPad7 || e.Key == Key.D7) str = cal.AddNumber('7');
+            else if (e.Key == Key.NumPad8 || e.Key == Key.D8) str = cal.AddNumber('8');
+            else if (e.Key == Key.NumPad9 || e.Key == Key.D9) str = cal.AddNumber('9');
+            else if (e.Key == Key.NumPad0 || e.Key == Key.D0) str = cal.AddNumber('0');
             else if (e.Key == Key.Decimal) str = cal.AddNumber(',');
             if (str != "") {
                 diplayWindow.Text = str;
@@ -149,6 +149,6 @@ namespace Calculator
             else if (e.Key == Key.Add) cal.Action('+');
             else if (e.Key == Key.Subtract) cal.Action('-');
             if (e.Key == Key.Enter) diplayWindow.Text = cal.Equals();
-        }
+        } 
     }
 }
