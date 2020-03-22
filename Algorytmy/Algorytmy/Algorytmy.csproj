@@ -45,6 +45,11 @@
   <ItemGroup>
     <Compile Include="Mod1\MaxValue.cs" />
     <Compile Include="Mod1\PolishNotation.cs" />
+    <Compile Include="Mod2\ListOneC.cs" />
+    <Compile Include="Mod2\ListOne.cs" />
+    <Compile Include="Mod2\ListTwoF.cs" />
+    <Compile Include="Mod2\ListTwo.cs" />
+    <Compile Include="Mod2\Node.cs" />
     <Compile Include="Mod2\PQueque.cs" />
     <Compile Include="Mod2\Queque.cs" />
     <Compile Include="Mod2\Stack.cs" />

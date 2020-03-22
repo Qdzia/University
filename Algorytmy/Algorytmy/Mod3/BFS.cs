@@ -59,7 +59,3 @@ namespace Algorytmy.Mod3
     }
 }
 
-//https://www.geeksforgeeks.org/breadth-first-search-or-bfs-for-a-graph/
-//https://www.geeksforgeeks.org/depth-first-search-or-dfs-for-a-graph/
-//https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-greedy-algo-7/
-//https://www.geeksforgeeks.org/floyd-warshall-algorithm-dp-16/

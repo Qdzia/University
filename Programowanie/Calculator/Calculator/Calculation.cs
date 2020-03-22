@@ -16,26 +16,30 @@ namespace Calculator
         char sign = 'x';
         bool signChange;
         double result;
-        Regex regex;
+        Regex wholeNum;
+        Regex zeroDot;
 
         public Calculation() {
             chain = new List<char>();
             num1 = 0;
             num2 = 0;
             result = 0;
-            regex = new Regex(@"^(-?([1-9]\d*|0)(.\d*)?)$");
+            wholeNum = new Regex(@"^(-?([1-9]\d*)(,\d*)?)$");
+            zeroDot = new Regex(@"^(-?0(,\d*)?)$");
             signChange = true;
         }
         public string AddNumber(char c)
         {
+            if (num2 == result && num2 != 0) chain.Clear();
+            if(chain.Count == 0 && c ==',') chain.Add('0');
             chain.Add(c);
-            string str = string.Join("", chain);
-            Match match = regex.Match(str);
 
-            if (match.Success && str != "00")
-            {
+            string str = string.Join("", chain);
+            Match wholeNumMatch = wholeNum.Match(str);
+            Match zeroDotMatch = zeroDot.Match(str);
+
+            if (wholeNumMatch.Success || zeroDotMatch.Success)
                 num2 = Convert.ToDouble(str);
-            }
             else
             {
                 chain.RemoveAt(chain.Count - 1);
@@ -46,7 +50,7 @@ namespace Calculator
 
         public void Action(char sg)
         {
-            if (chain.Count > 0 && signChange == true)
+            if ((chain.Count > 0 || num2 != 0) && signChange == true)
             {
                 num1 = num2;
                 num2 = 0;
@@ -55,26 +59,23 @@ namespace Calculator
             }
             if (sign != sg)
                 sign = sg;
-            if (num1 == -1)
-            {
-                num1 = num2;
-                num2 = 0;
-            }
         }
 
         public string Equals()
         {
-            if (chain.Count > 0)
+            if (chain.Count > 0 )
             {
                 if (sign == '+') result = num1 + num2;
                 else if (sign == '-') result = num1 - num2;
                 else if (sign == '*') result = num1 * num2;
                 else if (sign == '/') result = num1 / num2;
+                
+                string strResult = Convert.ToString(result);
                 num2 = result;
-                num1 = -1;
+                num1 = 0;
                 chain.Clear();
                 signChange = true;
-                return Convert.ToString(result);
+                return strResult;
             }
             return Convert.ToString(result);
         }
@@ -92,6 +93,7 @@ namespace Calculator
             else if (chain.Count == 1)
             {
                 chain.Clear();
+                num2 = 0;
                 return "0";
             }
             
@@ -102,7 +104,6 @@ namespace Calculator
         {
             chain.Clear();
             num2 = 0;
-            signChange = true;
             return "0";
         }
 
@@ -120,11 +121,14 @@ namespace Calculator
         {
             if (chain.Count > 0)
             {
-                if (chain[0] == '-') chain.RemoveAt(0);
-                else chain.Insert(0, '-');
-                string str = string.Join("", chain);
-                num2 = Convert.ToDouble(str);
-                return str;
+                if (!(chain.Count < 3 && chain[0] == '0'))
+                {
+                    if (chain[0] == '-') chain.RemoveAt(0);
+                    else chain.Insert(0, '-');
+                    string str = string.Join("", chain);
+                    num2 = Convert.ToDouble(str);
+                    return str;
+                }
             }
             return "0";
         }

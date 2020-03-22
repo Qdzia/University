@@ -13,9 +13,17 @@ namespace Algorytmy
     {
         static void Main(string[] args)
         {
-            Statistic st = new Statistic();
+            //Statistic st = new Statistic();
+            ListTwoF list = new ListTwoF();
 
-            st.Analyze();
+            list.Add(2);
+            list.Add(1);
+            list.Add(5);
+            list.Add(6);
+            list.Add(3);
+            list.Remove(3);
+            list.Print();
+            //st.Analyze();
             Console.ReadLine();
         }
     }
