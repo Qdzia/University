@@ -42,13 +42,10 @@ namespace Algorytmy.Mod2
             if (head.Value == x) RemoveHead();
             else
             {
-                int count = 0;
-                while (temp.Next.Value != x && count < size - 2)
-                {
+                while (temp.Value != x && temp.Next != null)
                     temp = temp.Next;
-                    count++;
-                }
-                if (count != size - 2) RemoveNode(temp);
+
+                if (temp.Value == x) RemoveNode(temp);
             }
         }
 

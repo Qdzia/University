@@ -76,13 +76,10 @@ namespace Algorytmy.Mod2
             if (head.Value == x) head = temp.Next;
             else 
             {
-                int count = 0;
-                while (temp.Next.Value != x && count<size-2)
-                {
+                while (temp.Value != x && temp.Next != null)
                     temp = temp.Next;
-                    count++;
-                }
-                if(count != size - 2) RemoveNode(temp);
+                
+                if (temp.Value == x) RemoveNode(temp);
             }
         }
 
@@ -90,7 +87,7 @@ namespace Algorytmy.Mod2
         {
             Node temp = head;
             if (inx == 0) head = temp.Next;
-            else 
+            else if( inx < size)
             {
                 for (int i = 0; i < inx-1; i++)
                     temp = temp.Next;

@@ -45,6 +45,7 @@ namespace Algorytmy.Mod2
                 node.Next = head;
                 head.Prev = node;
                 head = node;
+                size++;
             }
             else if (n < size)
             {
@@ -62,16 +63,16 @@ namespace Algorytmy.Mod2
         public void Remove(int x)
         {
             Node temp = head;
-            int count = 0;
-            while (temp.Value != x && count < size - 2)
+            while (temp.Value != x && temp.Next != null)
                 temp = temp.Next;
 
-            if(count != size - 2) RemoveNode(temp);
+            if(temp.Value== x) RemoveNode(temp);
         }
 
         public void RemoveAt(int inx)
         {
             Node temp = head;
+            if (inx >= size) return;
             for (int i = 0; i < inx; i++)
                 temp = temp.Next;
 

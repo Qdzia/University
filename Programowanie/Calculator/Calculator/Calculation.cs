@@ -33,6 +33,8 @@ namespace Calculator
             if (num2 == result && num2 != 0) chain.Clear();
             if(chain.Count == 0 && c ==',') chain.Add('0');
             chain.Add(c);
+            if(chain.Count == 2)
+                if(chain[0] == '0' && chain[1] != ',') chain.RemoveAt(0);
 
             string str = string.Join("", chain);
             Match wholeNumMatch = wholeNum.Match(str);
