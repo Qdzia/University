@@ -44,7 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bayes.cs" />
+    <Compile Include="FuzzyLogic.cs" />
+    <Compile Include="FuzzyRule.cs" />
     <Compile Include="Graphic.cs" />
+    <Compile Include="IndexAndDistance.cs" />
+    <Compile Include="kNN.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReadData.cs" />
@@ -55,7 +60,6 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="data\img.jpg" />
     <Content Include="data\Irys.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

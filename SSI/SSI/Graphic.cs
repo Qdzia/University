@@ -9,12 +9,8 @@ namespace SSI
 {
     class Graphic
     {
-        public void ToGrayScale()
+        public Bitmap ToGrayScale(Bitmap img)
         {
-            string path = @"../../data/img.jpg";
-
-            Bitmap img = new Bitmap(path);
-
             for (int i = 0; i < img.Width; i++)
             {
                 for (int j = 0; j < img.Height; j++)
@@ -26,44 +22,12 @@ namespace SSI
                     img.SetPixel(i, j, Color.FromArgb(1, avr, avr, avr));
                 }
             }
-
-            img.Save(@"../../data/grayImg.jpg");
-
+            return img;
         }
 
-        public void Filtr(int choice)
+        public Bitmap Filtr(double[][] kernel,bool find,Bitmap img)
         {
-            string path = @"../../data/car.jpg";
-            Bitmap img = new Bitmap(path);
-
             Bitmap btmF = new Bitmap(img.Width, img.Height);
-
-            double[][] kernel = new double[3][];
-
-            if (choice == 0)
-            {
-                kernel[0] = new double[] { -1, -1, -1 };
-                kernel[1] = new double[] { -1,  8, -1 };
-                kernel[2] = new double[] { -1, -1, -1 };
-            }
-            else if (choice == 1)
-            {
-                kernel[0] = new double[] { 1, 2, 1 };
-                kernel[1] = new double[] { 2, 4, 2 };
-                kernel[2] = new double[] { 1, 2, 1 };
-            }
-            else if(choice == 2)
-            {
-                kernel[0] = new double[] { -1, -2, -1 };
-                kernel[1] = new double[] { -2, 16, -2 };
-                kernel[2] = new double[] { -1, -2, -1 };
-            }
-            else
-            {
-                kernel[0] = new double[] { 0, 0, 0 };
-                kernel[1] = new double[] { -5, 5, 0 };
-                kernel[2] = new double[] { 0, 0, 0 };
-            }
 
             double[] sum = new double[] { 0, 0, 0 };
 
@@ -107,12 +71,82 @@ namespace SSI
                         if (sum[m] > 255) sum[m] = 255;
                     }
 
-                    btmF.SetPixel(i, j, Color.FromArgb((int)sum[0], (int)sum[1], (int)sum[2]));
+                    if (find)
+                    {
+                        if (sum[0] > 200 && sum[1] > 200 && sum[2] > 200)
+                            btmF.SetPixel(i, j, Color.Red);
+                        else
+                            btmF.SetPixel(i, j, Color.FromArgb((int)sum[0], (int)sum[1], (int)sum[2]));
+                    }
+                    else btmF.SetPixel(i, j, Color.FromArgb((int)sum[0], (int)sum[1], (int)sum[2]));
 
                 }
             }
 
-            btmF.Save(@"../../data/ShapeImg.jpg");
+            return btmF;
+        }
+
+        public void FindKeyPoints() 
+        {
+            string path = @"../../data/car.jpg";
+            Bitmap img = new Bitmap(path);
+
+            double[][] k1 = new double[3][];
+            double[][] k2 = new double[5][];
+
+            k2[0] = new double[] { 1, 4, 6, 4, 1 };
+            k2[1] = new double[] { 4, 16, 24, 16, 4 };
+            k2[2] = new double[] { 6, 24, 36, 24, 6 };
+            k2[3] = new double[] { 4, 16, 24, 16, 4 };
+            k2[4] = new double[] { 1, 4, 6, 4, 1 };
+
+            k1[0] = new double[] { -1, -1, -1 };
+            k1[1] = new double[] { -1, 8, -1 };
+            k1[2] = new double[] { -1, -1, -1 };
+
+            img = ToGrayScale(img);
+            img = Filtr(k2, false, img);
+            img = Filtr(k1, false, img);
+
+            k2[0] = new double[] { 0, 0,0, 0, 0 };
+            k2[1] = new double[] { 0, 1,-2, 1, 0 };
+            k2[2] = new double[] { 0,-2, 5,-2,0 };
+            k2[3] = new double[] { 0, 1,-2, 1, 0 };
+            k2[4] = new double[] { 0, 0,0, 0, 0 };
+
+            img = Filtr(k2, true, img);
+
+            img.Save(@"../../data/ShapeImg.jpg");
         }
     }
 }
+
+/*
+ * 
+ *          k1[0] = new double[] { 1, -2, 1 };
+            k1[1] = new double[] { -2, 5, -2 };
+            k1[2] = new double[] { 1, -2, 1 };
+
+             kernel[0] = new double[] { -1, -1, -1 };
+             kernel[1] = new double[] { -1,  8, -1 };
+             kernel[2] = new double[] { -1, -1, -1 };
+
+             kernel[0] = new double[] { 1, 4, 6, 4, 1};
+             kernel[1] = new double[] { 4, 16, 24, 16, 4};
+             kernel[2] = new double[] { 6, 24, 36, 24, 6};
+             kernel[3] = new double[] { 4, 16, 24, 16, 4};
+             kernel[4] = new double[] { 1, 4, 6, 4, 1};
+
+             kernel[0] = new double[] { -1, -2, -1 };
+             kernel[1] = new double[] { -2, 16, -2 };
+             kernel[2] = new double[] { -1, -2, -1 };
+
+            kernel[0] = new double[] { 0, 0, 0 };
+            kernel[1] = new double[] { -5, 5, 0 };
+            kernel[2] = new double[] { 0, 0, 0 };
+
+            k1[0] = new double[] { 1, 2, 1 };
+            k1[1] = new double[] { 2, 4, 2 };
+            k1[2] = new double[] { 1, 2, 1 };
+ 
+ * */
