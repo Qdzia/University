@@ -29,10 +29,7 @@ namespace SSI
                     if (data[i][j+4]==1) data[i][4] = j;
                 }
             }
-            for (int i = 0; i < data.Length; i++)
-            {
-                Console.WriteLine(FlowerToString(data, i));
-            }
+
         }
 
         private int Classify(double[] unknown, double[][] data, int numClasses, int k)
@@ -60,14 +57,14 @@ namespace SSI
             {
                 string dist = info[i].dist.ToString("F3");
 
-                Console.WriteLine(dist + " || " + FlowerToString(data,i));
+                Console.WriteLine(dist + " || " + FlowerToString(data, info[i].idx, i, info));
 
             }
         }
-        String FlowerToString(double[][] data, int idx)
+        String FlowerToString(double[][] data, int idx, int i, IndexAndDistance[] info)
         {
-            return String.Format("{0:0.00} | {1:0.00} | {2:0.00} | {3:0.00} | {4} | {5} | {6}",
-                    data[idx][0], data[idx][1], data[idx][2], data[idx][3], data[idx][4], data[idx][5], data[idx][6]);
+            return String.Format("{0:0.00} | {1:0.00} | {2:0.00} | {3:0.00} | {4} ",
+                    data[idx][0], data[idx][1], data[idx][2], data[idx][3], data[idx][4], info[i].dist);
         
         }
         double Distance(double[] unknown, double[] data)
