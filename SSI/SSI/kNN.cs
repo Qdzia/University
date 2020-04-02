@@ -12,10 +12,29 @@ namespace SSI
         {
             int numClasses = 3;
             int k = 4;
-
+            FindClassInData(numClasses, ref data);
+            
             int predicted = Classify(unknown, data, numClasses, k);
 
         }
+
+        private void FindClassInData(int numClasses, ref double[][] data)
+        {
+            var classes = new double[data.Length][];
+
+            for (int i = 0; i < data.Length; i++)
+            {
+                for (int j = 0; j < numClasses; j++)
+                {
+                    if (data[i][j+4]==1) data[i][4] = j;
+                }
+            }
+            for (int i = 0; i < data.Length; i++)
+            {
+                Console.WriteLine(FlowerToString(data, i));
+            }
+        }
+
         private int Classify(double[] unknown, double[][] data, int numClasses, int k)
         {
             int n = data.Length;
@@ -65,7 +84,7 @@ namespace SSI
             for (int i = 0; i < k; ++i)
             {       
                 int idx = info[i].idx;            
-                int c = (int)trainData[idx][2];
+                int c = (int)trainData[idx][4];
                 ++votes[c];
             }
             int mostVotes = 0;

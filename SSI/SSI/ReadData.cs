@@ -16,7 +16,7 @@ namespace SSI
 
             data = new double[lines.Length][];
 
-            Shuffle(lines);
+            //Shuffle(lines);
 
             for (int i = 0; i < lines.Length; i++)
             {

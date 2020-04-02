@@ -16,9 +16,10 @@ namespace SSI
             Bayes bay = new Bayes();
             kNN knn = new kNN();
 
-            double[] param = new double[4] { 0.7, 0.4, 0.5, 0.2 };
+            double[] param = new double[4] { 0.70, 0.30, 0.48, 0.14 };
             //ss.Start();
             rd.ReadFlower();
+            //rd.PrintData();
             knn.kNNClassify(rd.GetData(), param);
             //bay.Classify(param,rd.GetData(),3);
             //rd.PrintData();
