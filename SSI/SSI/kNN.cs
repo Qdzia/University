@@ -29,7 +29,6 @@ namespace SSI
                     if (data[i][j+4]==1) data[i][4] = j;
                 }
             }
-
         }
 
         private int Classify(double[] unknown, double[][] data, int numClasses, int k)

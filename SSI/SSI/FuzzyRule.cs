@@ -32,7 +32,7 @@ namespace SSI
         }
         public double GetElOfIndx(int indx) 
         {
-            if (indx < elements.Count && indx > 0)
+            if (indx < elements.Count && indx >= 0)
                 return elements[indx];
             else throw new IndexOutOfRangeException("Index must be in elements list");
         }

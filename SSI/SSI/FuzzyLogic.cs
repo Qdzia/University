@@ -12,6 +12,7 @@ namespace SSI
         List<double> results;
         List<double> resultOfRules;
         int numOfEntry;
+        string[] decisions;
 
 
         public FuzzyLogic()
@@ -21,16 +22,29 @@ namespace SSI
             resultOfRules = new List<double>();
             numOfEntry = 0;
         }
-        public void LoadData(double[,] data) 
+
+        public void UseFuzzyLogic(double[][] data)
         {
             numOfEntry = data.Length;
+            rules.Add(new FuzzyRule(0.1, 0.2, 0.3, 0.3));
+            rules.Add(new FuzzyRule(0.4, 0.6, 0.8, 0.8));
+            rules.Add(new FuzzyRule(0.6, 0.7, 1, 1));
+
+            LoadData(data);
+            CalculateResults();
+            Decision();
+
+        }
+        public void LoadData(double[][] data)
+        {
             for (int i = 0; i < numOfEntry; i++)
-            {
-                for (int j = 0; j < rules.Count; j++)
-                {
-                    rules[j].AddElement(data[i,j]);
-                }
-            }
+                rules[2].AddElement(data[i][0]);
+
+            for (int i = 0; i < numOfEntry; i++)
+                rules[1].AddElement(data[i][2]);
+
+            for (int i = 0; i < numOfEntry; i++)
+                rules[0].AddElement(data[i][3]);
         }
 
         void CalculateResults() 
@@ -45,38 +59,30 @@ namespace SSI
                 results.Add(product);
             }
         }
-
-        void AddAvrgValue(double[] avrg) 
+        void Decision()
         {
-            foreach (double value in avrg)
-                resultOfRules.Add(value);
-        }
+            decisions = new string[numOfEntry];
 
-        void Desicion() 
-        {
-            double decision = 0;
-            for (int i = 0; i < resultOfRules.Count; i++)
-                decision += results[i] * resultOfRules[i];
-            
-            double tmp = 0;
-            for (int i = 0; i < results.Count; i++)
-                tmp += results[i];
-            
-            double result = decision / tmp;
+            for (int i = 0; i < numOfEntry; i++)
+            {
+                decisions[i] = Judge(results[i]);
+                Console.WriteLine("N[{2}]F: {0:0.00000} - D: {1}", results[i], decisions[i],i);
+            }   
         }
         
-        double prod(params double[] numbers)
+        double Avrg(params double[] numbers)
         {
-            double results = 1;
+            double results = 0;
             for (int i = 0; i < numbers.Length; i++)
-                results *= numbers[i];
+                results += numbers[i];
 
-            return results;
+            return results/numbers.Length;
         }
-       double min(double a, double b)
+       string Judge(double a)
         {
-            if (a < b) return a;
-            else return b;
+            if (a > 0.9) return "3. Iris-virginica";
+            else if (a > 0) return "2. Iris-versicolor";
+            else return "1. Iris-setosa";
         }
         public void AddRule(double a, double b, double c)
         {
