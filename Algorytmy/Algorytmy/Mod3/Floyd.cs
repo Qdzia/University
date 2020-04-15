@@ -18,10 +18,10 @@ namespace Algorytmy.Mod3
                                         { inf, -1, inf, 0 }};
 
 
-            Search(graph, 0);
+            Search(graph);
         }
 
-        void Search(int[,] graph, int src)
+        void Search(int[,] graph)
         {
             for (int k = 0; k < V; k++)
             {

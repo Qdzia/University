@@ -47,7 +47,7 @@ namespace SSI
             double dd = (double)d;
             if (x <= a) return 0;                   //x -- a
             if (x <= b) return (x - a) / (b - a);   //a -- x -- b
-            if (x < c) return 1;                    //b -- x -- c
+            if (x <= c) return 1;                    //b -- x -- c
             if (x <= dd) return (dd - x) / (dd - c);   //c -- x -- d
             return 0;
         }

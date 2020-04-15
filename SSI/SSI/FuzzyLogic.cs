@@ -26,8 +26,8 @@ namespace SSI
         public void UseFuzzyLogic(double[][] data)
         {
             numOfEntry = data.Length;
-            rules.Add(new FuzzyRule(0.1, 0.2, 0.3, 0.3));
-            rules.Add(new FuzzyRule(0.4, 0.6, 0.8, 0.8));
+            rules.Add(new FuzzyRule(0.1, 0.2, 1, 1));
+            rules.Add(new FuzzyRule(0.4, 0.6, 1, 1));
             rules.Add(new FuzzyRule(0.6, 0.7, 1, 1));
 
             LoadData(data);
@@ -38,13 +38,12 @@ namespace SSI
         public void LoadData(double[][] data)
         {
             for (int i = 0; i < numOfEntry; i++)
+            {
                 rules[2].AddElement(data[i][0]);
-
-            for (int i = 0; i < numOfEntry; i++)
                 rules[1].AddElement(data[i][2]);
-
-            for (int i = 0; i < numOfEntry; i++)
                 rules[0].AddElement(data[i][3]);
+                //Console.WriteLine("N[{1}] VAL: {0:0.000}", data[i][3], i);
+            }
         }
 
         void CalculateResults() 
@@ -55,6 +54,7 @@ namespace SSI
                 for (int j = 0; j < rules.Count; j++)
                 {
                     product *= rules[j].GetElOfIndx(i);
+                    //Console.WriteLine("N[{1}] F: {0:0.000}", rules[j].GetElOfIndx(i), i);
                 }
                 results.Add(product);
             }
@@ -66,7 +66,7 @@ namespace SSI
             for (int i = 0; i < numOfEntry; i++)
             {
                 decisions[i] = Judge(results[i]);
-                Console.WriteLine("N[{2}]F: {0:0.00000} - D: {1}", results[i], decisions[i],i);
+                Console.WriteLine("N[{2}] F: {0:0.00000} - D: {1}", results[i], decisions[i],i);
             }   
         }
         

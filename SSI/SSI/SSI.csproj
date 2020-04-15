@@ -44,12 +44,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ANN\ActivationFunction\IActivationFunction.cs" />
+    <Compile Include="ANN\IInputFunction.cs" />
+    <Compile Include="ANN\ActivationFunction\RectifiedActivationFuncion.cs" />
+    <Compile Include="ANN\ActivationFunction\SigmoidActivationFunction .cs" />
+    <Compile Include="ANN\ActivationFunction\StepActivationFunction.cs" />
+    <Compile Include="ANN\INeuron.cs" />
+    <Compile Include="ANN\InputSynapse.cs" />
+    <Compile Include="ANN\ISynapse.cs" />
+    <Compile Include="ANN\NeuralLayer.cs" />
+    <Compile Include="ANN\NeuralLayerFactory.cs" />
+    <Compile Include="ANN\Neuron.cs" />
+    <Compile Include="ANN\SimpleNeuralNetwork.cs" />
+    <Compile Include="ANN\Synapse.cs" />
+    <Compile Include="ANN\WeightedSumFunction.cs" />
     <Compile Include="Bayes.cs" />
     <Compile Include="FuzzyLogic.cs" />
     <Compile Include="FuzzyRule.cs" />
     <Compile Include="Graphic.cs" />
     <Compile Include="IndexAndDistance.cs" />
     <Compile Include="kNN.cs" />
+    <Compile Include="NetworkHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReadData.cs" />

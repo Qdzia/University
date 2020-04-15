@@ -96,8 +96,8 @@ namespace SSI
             int n = data.Length;
             for (int i = 0; i < n; i++)
             {
-                string str = String.Format("{0:0.00} | {1:0.00} | {2:0.00} | {3:0.00} | {4} | {5} | {6}",
-                    data[i][0], data[i][1], data[i][2], data[i][3], data[i][4], data[i][5], data[i][6]);
+                string str = String.Format("N[{7}] {0:0.00} | {1:0.00} | {2:0.00} | {3:0.00} | {4} | {5} | {6}",
+                    data[i][0], data[i][1], data[i][2], data[i][3], data[i][4], data[i][5], data[i][6],i);
                 Console.WriteLine(str);
             }
 
