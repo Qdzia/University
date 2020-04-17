@@ -7,12 +7,12 @@ using System.Windows.Input;
 
 namespace FootballPlayersMVVM.ViewModels.BaseClass
 {
-    public class RelayCommand<T> : ICommand
+    public class RelayCommand : ICommand
     {
         #region Fields
 
-        readonly Action<T> _execute = null;
-        readonly Predicate<T> _canExecute = null;
+        readonly Action _execute = null;
+        readonly Func<object, bool> _canExecute = null;
 
         #endregion
 
@@ -23,7 +23,7 @@ namespace FootballPlayersMVVM.ViewModels.BaseClass
         /// </summary>
         /// <param name="execute">Delegate to execute when Execute is called on the command.  This can be null to just hook up a CanExecute delegate.</param>
         /// <remarks><seealso cref="CanExecute"/> will always return true.</remarks>
-        public RelayCommand(Action<T> execute)
+        public RelayCommand(Action execute)
             : this(execute, null)
         {
         }
@@ -33,7 +33,7 @@ namespace FootballPlayersMVVM.ViewModels.BaseClass
         /// </summary>
         /// <param name="execute">The execution logic.</param>
         /// <param name="canExecute">The execution status logic.</param>
-        public RelayCommand(Action<T> execute, Predicate<T> canExecute)
+        public RelayCommand(Action execute, Func<object, bool> canExecute)
         {
             _execute = execute ?? throw new ArgumentNullException("execute");
             _canExecute = canExecute;
@@ -52,7 +52,7 @@ namespace FootballPlayersMVVM.ViewModels.BaseClass
         ///</returns>
         public bool CanExecute(object parameter)
         {
-            return _canExecute == null ? true : _canExecute((T)parameter);
+            return _canExecute == null ? true : _canExecute(parameter);
         }
 
         ///<summary>
@@ -60,6 +60,7 @@ namespace FootballPlayersMVVM.ViewModels.BaseClass
         ///</summary>
         public event EventHandler CanExecuteChanged
         {
+
             add { CommandManager.RequerySuggested += value; }
             remove { CommandManager.RequerySuggested -= value; }
         }
@@ -69,10 +70,15 @@ namespace FootballPlayersMVVM.ViewModels.BaseClass
         ///Defines the method to be called when the command is invoked.
         ///</summary>
         ///<param name="parameter">Data used by the command. If the command does not require data to be passed, this object can be set to <see langword="null" />.</param>
-        public void Execute(object parameter)
+        public void Execute(object parameter = null)
         {
-            _execute((T)parameter);
+            _execute();
         }
+
+        // public void RaiseCanExecuteChanged(object sender, EventArgs e)
+        //{
+        //  CanExecuteChanged(sender, e);
+        // }
 
         #endregion
 
