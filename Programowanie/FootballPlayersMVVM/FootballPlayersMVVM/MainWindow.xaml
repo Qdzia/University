@@ -55,7 +55,7 @@
 
         <TextBox x:Name="ln_tb"
                  TextAlignment="Left" 
-                 VerticalAlignment="Center" 
+                 VerticalAlignment="Center"
                  GotFocus="tb_GotFocus"
                  LostFocus="tb_LostFocus"
                  FontSize="15" 
@@ -129,13 +129,23 @@
                 >Zapisz
         </Button>
 
-        <ListBox x:Name="player_l"
+        <ListView x:Name="player_l"
                  Grid.Column="4"
                  Grid.Row="0" Grid.RowSpan="9"
                  Margin="10"
                  ItemsSource="{Binding Players}" 
                  SelectedItem="{Binding CurrentlySelectedPlayer, Mode=TwoWay}"
-                 />
+                  >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="{Binding PlayerData}"></Label>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+
 
 
     </Grid>

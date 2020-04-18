@@ -15,9 +15,7 @@ using System.Windows.Shapes;
 
 namespace FootballPlayersMVVM
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -46,6 +44,10 @@ namespace FootballPlayersMVVM
                 tb.Text = "";
                 tb.Foreground = Brushes.Black;
             }
+            else
+            {
+                tb.Foreground = Brushes.Black;
+            }
         }
 
         private void tb_LostFocus(object sender, RoutedEventArgs e)
@@ -63,7 +65,6 @@ namespace FootballPlayersMVVM
             {
                 tb.BorderThickness = new Thickness(1);
                 tb.BorderBrush = Brushes.Gray;
-
             }
 
         }

@@ -11,5 +11,13 @@ namespace FootballPlayersMVVM
         public string firstName, lastName;
         public int age;
         public double weight;
+
+        public Player(string firstName, string lastName, int age, double weight)
+        {
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.age = age;
+            this.weight = weight;
+        }
     }
 }
