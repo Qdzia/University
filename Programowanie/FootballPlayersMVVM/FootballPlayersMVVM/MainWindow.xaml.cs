@@ -30,9 +30,6 @@ namespace FootballPlayersMVVM
             ln_tb.Text = "Podaj nazwisko";
             fn_tb.Foreground = Brushes.Gray;
             ln_tb.Foreground = Brushes.Gray;
-
-            for (int i = 10; i <= 60; i++)
-                age_cb.Items.Add(i);
         }
         private void tb_GotFocus(object sender, RoutedEventArgs e)
         {

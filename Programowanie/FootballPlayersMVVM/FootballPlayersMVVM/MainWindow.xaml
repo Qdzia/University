@@ -74,6 +74,7 @@
                   Grid.Row="3"
                   Margin="7"
                   SelectedIndex="0"
+                  ItemsSource="{Binding AgeRange}"
                   SelectedValue="{Binding PlayerAge}"
                   />
 

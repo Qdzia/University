@@ -20,6 +20,7 @@ namespace FootballPlayersMVVM
         public RelayCommand<PlayerVM> DeleteSelectedPlayerCommand { get; set; }
         public RelayCommand<PlayerVM> ModifySelectedPlayerCommand { get; set; }
         public RelayCommand SaveList { get; set; }
+        public List<int> AgeRange { get; set; }
 
         #endregion
 
@@ -67,6 +68,11 @@ namespace FootballPlayersMVVM
         #region Konstruktor
         public FootballManagerVM()
         {
+            AgeRange = new List<int>();
+
+            for (int i = 10; i <= 60; i++)
+                AgeRange.Add(i);
+
             CreatePlayerCommand = new RelayCommand
                 (CreatePlayer, CanCreatePlayer);
 
