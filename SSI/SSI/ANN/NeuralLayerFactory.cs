@@ -1,12 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/*
+ * Author: Nikola Živković
+ * Website: rubikscode.net
+ * Year: 2018
+ */
 
-namespace SSI.ANN
+using NeuralNetworkCSharp.ActivationFunctions;
+using NeuralNetworkCSharp.InputFunctions;
+
+namespace NeuralNetworkCSharp
 {
-    class NeuralLayerFactory
+    /// <summary>
+    /// Factory used to create layers.
+    /// </summary>
+    public class NeuralLayerFactory
     {
         public NeuralLayer CreateNeuralLayer(int numberOfNeurons, IActivationFunction activationFunction, IInputFunction inputFunction)
         {
@@ -14,8 +20,8 @@ namespace SSI.ANN
 
             for (int i = 0; i < numberOfNeurons; i++)
             {
-                var neuron = new Neuron(activationFunction, inputFunction);
-                layer.Neurons.Add(neuron as INeuron);
+                var neuron = new Neuron.Neuron(activationFunction, inputFunction);
+                layer.Neurons.Add(neuron);
             }
 
             return layer;

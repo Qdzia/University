@@ -1,11 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/*
+ * Author: Nikola Živković
+ * Website: rubikscode.net
+ * Year: 2018
+ */
 
-namespace SSI.ANN
+using System;
+
+namespace NeuralNetworkCSharp.Synapses
 {
+    /// <summary>
+    /// Interface for synapses (connections).
+    /// </summary>
     public interface ISynapse
     {
         double Weight { get; set; }

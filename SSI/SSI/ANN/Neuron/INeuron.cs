@@ -1,11 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/*
+ * Author: Nikola Živković
+ * Website: rubikscode.net
+ * Year: 2018
+ */
 
-namespace SSI.ANN
+using NeuralNetworkCSharp.Synapses;
+using System;
+using System.Collections.Generic;
+
+namespace NeuralNetworkCSharp.Neuron
 {
+    /// <summary>
+    /// Interface for Neuron.
+    /// </summary>
     public interface INeuron
     {
         Guid Id { get; }

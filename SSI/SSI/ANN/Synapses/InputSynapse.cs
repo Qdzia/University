@@ -1,10 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/*
+ * Author: Nikola Živković
+ * Website: rubikscode.net
+ * Year: 2018
+ */
 
-namespace SSI.ANN
+using NeuralNetworkCSharp.Neuron;
+using System;
+
+namespace NeuralNetworkCSharp.Synapses
 {
     public class InputSynapse : ISynapse
     {
@@ -32,7 +35,7 @@ namespace SSI.ANN
         {
             return Output;
         }
-
+        
         public bool IsFromNeuron(Guid fromNeuronId)
         {
             return false;

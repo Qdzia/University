@@ -1,12 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/*
+ * Author: Nikola Živković
+ * Website: rubikscode.net
+ * Year: 2018
+ */
 
-namespace SSI.ANN
+using System;
+
+namespace NeuralNetworkCSharp.ActivationFunctions
 {
-    class SigmoidActivationFunction : IActivationFunction
+    /// <summary>
+    /// Implementation of Sigmoid Activation Function.
+    /// </summary>
+    public class SigmoidActivationFunction : IActivationFunction
     {
         private double _coeficient;
 
