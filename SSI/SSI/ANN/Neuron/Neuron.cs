@@ -4,14 +4,14 @@
  * Year: 2018
  */
 
-using NeuralNetworkCSharp.ActivationFunctions;
-using NeuralNetworkCSharp.InputFunctions;
-using NeuralNetworkCSharp.Synapses;
+using SSI.ANN.ActivationFunctions;
+using SSI.ANN.InputFunctions;
+using SSI.ANN.Synapses;
 using System;
 using System.Linq;
 using System.Collections.Generic;
 
-namespace NeuralNetworkCSharp.Neuron
+namespace SSI.ANN.Neuron
 {
     /// <summary>
     /// Neuron implementation.

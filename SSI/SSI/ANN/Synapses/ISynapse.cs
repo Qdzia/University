@@ -6,7 +6,7 @@
 
 using System;
 
-namespace NeuralNetworkCSharp.Synapses
+namespace SSI.ANN.Synapses
 {
     /// <summary>
     /// Interface for synapses (connections).

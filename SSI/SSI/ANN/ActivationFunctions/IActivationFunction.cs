@@ -4,7 +4,7 @@
  * Year: 2018
  */
 
-namespace NeuralNetworkCSharp.ActivationFunctions
+namespace SSI.ANN.ActivationFunctions
 {
     /// <summary>
     /// Interface for activation functions.

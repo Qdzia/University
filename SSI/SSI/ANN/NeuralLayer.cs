@@ -4,11 +4,11 @@
  * Year: 2018
  */
 
-using NeuralNetworkCSharp.Neuron;
+using SSI.ANN.Neuron;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NeuralNetworkCSharp
+namespace SSI.ANN
 {
     /// <summary>
     /// Implementation of the single layer in Artificial Neural Network.

@@ -4,11 +4,11 @@
  * Year: 2018
  */
 
-using NeuralNetworkCSharp.Synapses;
+using SSI.ANN.Synapses;
 using System;
 using System.Collections.Generic;
 
-namespace NeuralNetworkCSharp.Neuron
+namespace SSI.ANN.Neuron
 {
     /// <summary>
     /// Interface for Neuron.

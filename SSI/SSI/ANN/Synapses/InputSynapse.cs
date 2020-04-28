@@ -4,10 +4,10 @@
  * Year: 2018
  */
 
-using NeuralNetworkCSharp.Neuron;
+using SSI.ANN.Neuron;
 using System;
 
-namespace NeuralNetworkCSharp.Synapses
+namespace SSI.ANN.Synapses
 {
     public class InputSynapse : ISynapse
     {

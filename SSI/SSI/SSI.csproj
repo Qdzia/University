@@ -65,6 +65,10 @@
     <Compile Include="IndexAndDistance.cs" />
     <Compile Include="kNN.cs" />
     <Compile Include="NetworkHandler.cs" />
+    <Compile Include="NeuralNetwork\Layer.cs" />
+    <Compile Include="NeuralNetwork\Network.cs" />
+    <Compile Include="NeuralNetwork\Neuron.cs" />
+    <Compile Include="NeuralNetwork\Synapse.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReadData.cs" />

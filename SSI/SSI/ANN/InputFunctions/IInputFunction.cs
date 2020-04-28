@@ -4,10 +4,10 @@
  * Year: 2018
  */
 
-using NeuralNetworkCSharp.Synapses;
+using SSI.ANN.Synapses;
 using System.Collections.Generic;
 
-namespace NeuralNetworkCSharp.InputFunctions
+namespace SSI.ANN.InputFunctions
 {
     /// <summary>
     /// Interface for Input Functions.

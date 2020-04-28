@@ -4,10 +4,10 @@
  * Year: 2018
  */
 
-using NeuralNetworkCSharp.ActivationFunctions;
-using NeuralNetworkCSharp.InputFunctions;
+using SSI.ANN.ActivationFunctions;
+using SSI.ANN.InputFunctions;
 
-namespace NeuralNetworkCSharp
+namespace SSI.ANN
 {
     /// <summary>
     /// Factory used to create layers.

@@ -6,7 +6,7 @@
 
 using System;
 
-namespace NeuralNetworkCSharp.ActivationFunctions
+namespace SSI.ANN.ActivationFunctions
 {
     /// <summary>
     /// Implementation of Rectifier Activation Function.

@@ -11,7 +11,7 @@ namespace SSI
         static void Main(string[] args)
         {
 
-            NetworkHandler.Use();
+            NetworkHandler.NewNetwork();
            /* ReadData rd = new ReadData();
             Graphic ghp = new Graphic();
             SoftSet ss = new SoftSet();

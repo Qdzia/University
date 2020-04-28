@@ -5,10 +5,10 @@
  */
 
 using System.Collections.Generic;
-using NeuralNetworkCSharp.Synapses;
+using SSI.ANN.Synapses;
 using System.Linq;
 
-namespace NeuralNetworkCSharp.InputFunctions
+namespace SSI.ANN.InputFunctions
 {
     /// <summary>
     /// Implementation of Weighted Sum Function.
