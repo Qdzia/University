@@ -15,73 +15,78 @@ namespace SSI
 
         public static void NewNetwork()
         {
-            Network network = new Network(2,3,1);
-            var trainDataSet = GetTrainData();
-            var expectedOutput = ExpectedValVektor();
-
-            for (int j = 0; j < 500; j++)
-            {
-                for (int i = 0; i < 150; i++)
-                {
-                    network.Train(new double[2] { trainDataSet[i][1], trainDataSet[i][2] }, expectedOutput[i]);
-                }
-
-            }
-            
-
-            Console.WriteLine("Teraz zera");
-            network.PushInputValues(new double[2] { 0.18, 0.03 });
-            network.PushInputValues(new double[2] { 0.20, 0.04 });
-            network.PushInputValues(new double[2] { 0.16, 0.05 });
-
-            Console.WriteLine("Teraz jedynki");
-            network.PushInputValues(new double[2] { 0.65, 0.23 });
-            network.PushInputValues(new double[2] { 0.66, 0.25 });
-            network.PushInputValues(new double[2] { 0.62, 0.30 });
-
-
-        }
-        public static void Use() 
-        {
-            var network = new SimpleNeuralNetwork(3);
-            var layerFactory = new NeuralLayerFactory();
-
-            network.AddLayer(layerFactory.CreateNeuralLayer(3, new RectifiedActivationFuncion(), new WeightedSumFunction()));
-            network.AddLayer(layerFactory.CreateNeuralLayer(1, new SigmoidActivationFunction(0.7), new WeightedSumFunction()));
-
-            //network.PushExpectedValues(ExpectedValVektor());
-
-            network.Train(GetTrainData(), 10000);
-
-            network.PushInputValues(new double[] { 5.9, 5.1, 1.8 });
-            var outputs = network.GetOutput();
-
-            foreach (double val in outputs)
-            {
-                Console.WriteLine(val + "\n");
-            }
-            
-        }
-
-        static double[] ExpectedValVektor() 
-        {
-            double[] expectedValues = new double[150];
-            for (int i = 0; i < 50; i++) expectedValues[i] = 0;
-            for (int j = 50; j < 100; j++) expectedValues[j] = 0;
-            for (int k = 100; k < 150; k++) expectedValues[k] = 1;
-
-            return expectedValues;
-        }
-
-        static double[][] GetTrainData()
-        {
+            Network network = new Network(1,1,1,1);
             ReadData rd = new ReadData();
             rd.ReadFlower();
             //rd.PrintData();
             double[][] data = rd.GetData();
+            var trainDataSet = GetTrainData(data);
+            var expectedOutput = ExpectedValVektor(data);
+
+
+            //network.PushInputValues(new double[4] { 0.18, 0.03, 0.5, 0.4 });
+            //network.PushInputValues(new double[4] { 1, 1, 1,1 });
+            for (int j = 0; j < 1; j++)
+            {
+                //network.Train(new double[4] { 0.1, 0.5, 0.3, 0.8 }, new double[3] { 0.1, 0.5, 0.9 });
+                network.Train(new double[1] { 0.5 }, new double[1] { 1 });
+            }
+
+
+            network.PrintNetwork();
+
+            //network.Train(trainDataSet[0], expectedOutput[0]);
+
+            //for (int j = 0; j < 1; j++)
+            //{
+            //    for (int i = 0; i < 150; i++)
+            //    {
+            //        network.Train(trainDataSet[i], expectedOutput[i]);
+            //    }
+
+            //}
+            /*
+            Console.WriteLine("Pierwszy");
+            network.PushInputValues(new double[2] { 0.18, 0.03 });
+            network.PushInputValues(new double[2] { 0.20, 0.04 });
+            network.PushInputValues(new double[2] { 0.16, 0.05 });
+
+            Console.WriteLine("Drugi");
+            network.PushInputValues(new double[2] { 0.57, 0.20 });
+            network.PushInputValues(new double[2] { 0.52, 0.16 });
+            network.PushInputValues(new double[2] { 0.42, 0.13 });
+
+            Console.WriteLine("Trzeci");
+            network.PushInputValues(new double[2] { 0.65, 0.23 });
+            network.PushInputValues(new double[2] { 0.66, 0.25 });
+            network.PushInputValues(new double[2] { 0.62, 0.30 });
+            */
+        }
+
+        static double[][] ExpectedValVektor(double [][] data) 
+        {
+            double[][] expectedValues = new double[150][];
+
+            for (int i = 0; i < 150; i++)
+            {
+                expectedValues[i] = new double[3];
+                for (int j = 0; j < 3; j++)
+                {
+                    expectedValues[i][j] = data[i][4+j];
+                    //Console.Write(data[i][4 + j]);
+                }
+                //Console.WriteLine();
+            }
+
+            return expectedValues;
+        }
+
+        static double[][] GetTrainData(double[][] data)
+        {
+            
             double[][] dataValues = new double[150][];
 
-            for (int i = 0; i < 150; i++) dataValues[i] = new double[] { data[i][0], data[i][2], data[i][3] };
+            for (int i = 0; i < 150; i++) dataValues[i] = new double[] { data[i][0], data[i][1], data[i][2], data[i][3] };
 
             return dataValues;
         }

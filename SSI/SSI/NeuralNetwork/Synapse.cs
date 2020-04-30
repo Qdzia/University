@@ -10,12 +10,13 @@ namespace SSI.NeuralNetwork
     {
         public Neuron FromNeuron;
         public Neuron ToNeuron;
+        static Random rnd = new Random();
 
         public Synapse(Neuron from, Neuron to)
         {
             FromNeuron = from;
             ToNeuron = to;
-            Weight = 0.5;
+            Weight = 0.5;//rnd.NextDouble() - 0.5;
         }
         public double Weight { get; set; }
 
@@ -25,6 +26,10 @@ namespace SSI.NeuralNetwork
         {
             PreviousWeight = Weight;
             Weight += learningRate * delta;
+        }
+        public double GetOutput()
+        {
+            return FromNeuron.Value;
         }
     }
 

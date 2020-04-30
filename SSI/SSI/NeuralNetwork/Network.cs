@@ -10,38 +10,28 @@ namespace SSI.NeuralNetwork
     {
         Layer _inputLayer;
         Layer _outputLayer;
-        Layer[] _hiddenLayers;
+        Layer[] _layers;
         double _learningRate;
 
-        public Network(params int[] layers)
+        #region Create Network Methods
+        public Network(params int[] layersNum)
         {
-            _learningRate = 0.15;
-            int len = layers.Length;
+            _learningRate = 0.1;
+            int len = layersNum.Length;
             if (len > 2)
             {
-                _inputLayer = new Layer(layers[0]);
-                //Console.WriteLine("new layer 0 " + layers[0]);
-                _hiddenLayers = new Layer[len - 2];
-                for (int i = 1; i < len - 1; i++)
+                _layers = new Layer[len];
+                for (int i = 0; i < len ; i++)
                 {
-                    _hiddenLayers[i-1] =  new Layer(layers[i]);
-                    //Console.WriteLine("new Hiddenlayer " + i + " " + layers[i]);
+                    _layers[i] =  new Layer(layersNum[i]);
                 }
-                //Console.WriteLine("new layer last " + layers[len-1]);
-                _outputLayer = new Layer(layers[len-1]);
+                _inputLayer =  _layers[0];
+                _outputLayer = _layers[len-1];
             }
-            ConnectLayers(_inputLayer, _hiddenLayers[0]);
-            ConnectLayers(_hiddenLayers[0],_outputLayer);
-
-            //for (int i = 0; i < 100; i++)
-            //{
-            //    Train(new double[2] { 0.30, 0.15 }, 0.21);
-            //}
-
-
-            //PrintWeights(_inputLayer);
-            //PrintWeights(_hiddenLayers[0]);
-
+            for (int i = 0; i < len-1; i++)
+            {
+                ConnectLayers(_layers[i], _layers[i+1]);
+            }
         }
 
         void ConnectLayers(Layer first, Layer second)
@@ -59,83 +49,137 @@ namespace SSI.NeuralNetwork
                 }
             }
         }
+        #endregion
         public void PushInputValues(double[] input)
         {
-            _inputLayer.Neurons[0].Value = input[0];
-            _inputLayer.Neurons[1].Value = input[1];
-            foreach (var neuron in _hiddenLayers[0].Neurons)
-            {
-                neuron.CallActivationFunction();
-                //Console.WriteLine("Hidden val: " + neuron.Value);
-            }
-            foreach (var neuron in _outputLayer.Neurons)
-            {
-                neuron.CallActivationFunction();
-                Console.WriteLine("Output: " + neuron.Value);
-            }
+            if (input.Length != _inputLayer.Neurons.Length) 
+                throw new ArgumentOutOfRangeException("Wrong Input Vector");
 
+            for (int i = 0; i < input.Length; i++)
+            {
+                _inputLayer.Neurons[i].Value = input[i];
+            }
+            for (int j = 1; j < _layers.Length; j++)
+            {
+                foreach (var neuron in _layers[j].Neurons)
+                {
+                    neuron.GetOutput();
+                }
+            }
         }
 
-        public void Train(double[] input,double actual)
+        public void Train(double[] input,double[] actual)
         {
             PushInputValues(input);
-
+            PrintNetwork();
             HandleOutputLayer(actual);
-            HandleHiddenLayers(actual);
-
+            HandleHiddenLayers();
+            //PrintOutputs();
+            //CalculateTotalError(actual);
         }
-        private void HandleOutputLayer(double expectedOutput)
+        private double CalculateTotalError(double[] expected)
+        {
+            double totalError = 0;
+            foreach (Neuron neuron in _outputLayer.Neurons)
+            {
+                var error = Math.Pow(neuron.Value - expected[neuron.ID], 2);
+                totalError += error;
+                Console.WriteLine($"OutputError[{neuron.ID}]: " + error);
+            }
+            Console.WriteLine($"TotalError: " + totalError);
+            Console.WriteLine();
+            return totalError;
+        }
+        private void HandleOutputLayer(double[] expectedOutput)
         {
             foreach (var neuron in _outputLayer.Neurons)
             {
+                Console.WriteLine($"Neuron[{neuron.ID}] \n");
                 foreach (var synapse in neuron.InputSynapses)
                 {
+                    var nodeDelta = (neuron.Value - expectedOutput[neuron.ID]);
+                    var output = neuron.Value;
+                    var derivative = output * (1.0 - output);
 
-                    var delta = (neuron.Value - expectedOutput) * synapse.FromNeuron.Value;
+                    //Console.WriteLine("nodeDelta " + nodeDelta);
+                    //Console.WriteLine("output " + output);
+                    //Console.WriteLine("derivative " + derivative);
+
+                    var delta = nodeDelta * derivative;
                     synapse.UpdateWeight(_learningRate, -delta);
-                    /* var output = neuron.Value;
-                     var netInput = synapse.FromNeuron.Value;
 
-                     var nodeDelta = (expectedOutput - output) * output * (1 - output);
-                     var delta = -1 * netInput * nodeDelta;
-
-                     synapse.UpdateWeight(_learningRate, delta);
-
-                     neuron.PreviousPartialDerivate = nodeDelta;*/
+                    Console.WriteLine("delta " + delta);
+                    neuron.PreviousPartialDerivate = nodeDelta;
                 }
+                Console.WriteLine("\n ");
             }
         }
-        private void HandleHiddenLayers(double expectedOutput)
+        private void HandleHiddenLayers()
         {
-            foreach (var neuron in _hiddenLayers[0].Neurons)
+            for (int i = _layers.Length - 2; i > 0; i--)
             {
-                foreach (var synapse in neuron.InputSynapses)
+                foreach (var neuron in _layers[i].Neurons)
                 {
-                    var delta = (neuron.Value - expectedOutput) * synapse.FromNeuron.Value * neuron.OutputSynapses[0].PreviousWeight;
-                    synapse.UpdateWeight(_learningRate, -delta);
-
-                    /*var output = neuron.Value;
-                    var netInput = synapse.FromNeuron.Value;
-                    double sumPartial = 0;
-
-                    foreach (var outputSynapse in neuron.OutputSynapses)
+                    foreach (var synapse in neuron.InputSynapses)
                     {
-                        sumPartial += outputSynapse.PreviousWeight * outputSynapse.ToNeuron.PreviousPartialDerivate;
-                    }
+                        var netInput = synapse.GetOutput();
+                        var output = neuron.Value;
+                        var derivative = output * (1.0 - output);
 
-                    var delta = -1 * netInput * sumPartial * output * (1 - output);
-                    synapse.UpdateWeight(_learningRate, delta);*/
+                        double sumPartial = 0;
+                        foreach (var outputSynapse in neuron.OutputSynapses)
+                        {
+                            sumPartial += outputSynapse.PreviousWeight * outputSynapse.ToNeuron.PreviousPartialDerivate;
+                        }
+
+                        var nodeDelta = sumPartial * output * (1 - output);
+                        var delta =  netInput * nodeDelta;
+
+                        //neuron.PreviousPartialDerivate = nodeDelta;
+
+                        synapse.UpdateWeight(_learningRate, -delta);
+                    }
                 }
             }
         }
-        void PrintWeights(Layer layer) 
+        #region Print Network Functions
+        public void PrintOutputs()
         {
-            Console.WriteLine("Layer");
-            foreach (var neuron in layer.Neurons)
+            foreach (var neuron in _outputLayer.Neurons)
             {
-                Console.WriteLine("Neuron");
-                neuron.PrintWeight();
+                Console.WriteLine($"OutputValue[{neuron.ID}]: {neuron.Value} "); 
             }
+            Console.WriteLine();
         }
+        public void PrintNetwork() 
+        {
+            for (int i = 0; i < _layers.Length-1; i++)
+            {
+                Console.WriteLine($"\nLayer [{i}] ");
+                Console.Write(" NeuronValue:  ");
+                for (int j = 0; j < _layers[i].Neurons.Length; j++)
+                {
+                    Console.Write(_layers[i].Neurons[j].Value + "   ");
+                }
+                Console.WriteLine();
+                for (int k = 0; k < _layers[i].Neurons.Length; k++)
+                {
+                    Console.Write($"        WeightsToNeu({k}):  ");
+                    for (int j = 0; j < _layers[i].Neurons[k].OutputSynapses.Length; j++)
+                    {
+                        Console.Write(_layers[i].Neurons[k].OutputSynapses[j].Weight + "   ");
+                    }
+                    Console.WriteLine();
+                }
+            }
+            Console.WriteLine("OutputLayer  ");
+            Console.Write(" NeuronValue:  ");
+            for (int j = 0; j < _outputLayer.Neurons.Length; j++)
+            {
+                Console.Write(_outputLayer.Neurons[j].Value + "   ");
+            }
+            Console.WriteLine();
+        }
+        #endregion
     }
 }
