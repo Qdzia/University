@@ -17,7 +17,7 @@ namespace SSI.NeuralNetwork
             Neurons = new Neuron[numOfNeuron];
             for (int i = 0; i < numOfNeuron; i++)
             {
-                Neurons[i] = new Neuron(i,new ArcTanActivationFunction());
+                Neurons[i] = new Neuron(i,new RectifiedActivationFuncion());
             }
         }
 

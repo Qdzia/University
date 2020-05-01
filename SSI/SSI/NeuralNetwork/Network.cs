@@ -16,21 +16,21 @@ namespace SSI.NeuralNetwork
         #region Create Network Methods
         public Network(params int[] layersNum)
         {
-            _learningRate = 0.1;
+            _learningRate = 0.2;
             int len = layersNum.Length;
             if (len > 2)
             {
                 _layers = new Layer[len];
-                for (int i = 0; i < len ; i++)
+                for (int i = 0; i < len; i++)
                 {
-                    _layers[i] =  new Layer(layersNum[i]);
+                    _layers[i] = new Layer(layersNum[i]);
                 }
-                _inputLayer =  _layers[0];
-                _outputLayer = _layers[len-1];
+                _inputLayer = _layers[0];
+                _outputLayer = _layers[len - 1];
             }
-            for (int i = 0; i < len-1; i++)
+            for (int i = 0; i < len - 1; i++)
             {
-                ConnectLayers(_layers[i], _layers[i+1]);
+                ConnectLayers(_layers[i], _layers[i + 1]);
             }
         }
 
@@ -44,7 +44,7 @@ namespace SSI.NeuralNetwork
                 {
                     Synapse synapse = new Synapse(first.Neurons[i], second.Neurons[j]);
                     second.Neurons[j].InitInputSynapses(first.Neurons.Length);
-                    first.Neurons[i].AddOutputSynapse(synapse,j);
+                    first.Neurons[i].AddOutputSynapse(synapse, j);
                     second.Neurons[j].AddInputSynapse(synapse, i);
                 }
             }
@@ -52,7 +52,7 @@ namespace SSI.NeuralNetwork
         #endregion
         public void PushInputValues(double[] input)
         {
-            if (input.Length != _inputLayer.Neurons.Length) 
+            if (input.Length != _inputLayer.Neurons.Length)
                 throw new ArgumentOutOfRangeException("Wrong Input Vector");
 
             for (int i = 0; i < input.Length; i++)
@@ -67,11 +67,15 @@ namespace SSI.NeuralNetwork
                 }
             }
         }
-
+        public void PushInputValuesInConsole(double[] input)
+        {
+            PushInputValues(input);
+            PrintOutputs();
+        }
         public void Train(double[] input,double[] actual)
         {
             PushInputValues(input);
-            PrintNetwork();
+            //PrintNetwork();
             HandleOutputLayer(actual);
             HandleHiddenLayers();
             //PrintOutputs();
@@ -90,11 +94,12 @@ namespace SSI.NeuralNetwork
             Console.WriteLine();
             return totalError;
         }
+
         private void HandleOutputLayer(double[] expectedOutput)
         {
             foreach (var neuron in _outputLayer.Neurons)
             {
-                Console.WriteLine($"Neuron[{neuron.ID}] \n");
+                //Console.WriteLine($"Neuron[{neuron.ID}] \n");
                 foreach (var synapse in neuron.InputSynapses)
                 {
                     var nodeDelta = (neuron.Value - expectedOutput[neuron.ID]);
@@ -105,13 +110,13 @@ namespace SSI.NeuralNetwork
                     //Console.WriteLine("output " + output);
                     //Console.WriteLine("derivative " + derivative);
 
-                    var delta = nodeDelta * derivative;
+                    var delta = 2* nodeDelta * synapse.FromNeuron.Value;
                     synapse.UpdateWeight(_learningRate, -delta);
 
-                    Console.WriteLine("delta " + delta);
+                    //Console.WriteLine("delta " + delta);
                     neuron.PreviousPartialDerivate = nodeDelta;
                 }
-                Console.WriteLine("\n ");
+               // Console.WriteLine("\n ");
             }
         }
         private void HandleHiddenLayers()
@@ -132,10 +137,9 @@ namespace SSI.NeuralNetwork
                             sumPartial += outputSynapse.PreviousWeight * outputSynapse.ToNeuron.PreviousPartialDerivate;
                         }
 
-                        var nodeDelta = sumPartial * output * (1 - output);
-                        var delta =  netInput * nodeDelta;
+                        var delta = netInput * sumPartial;
 
-                        //neuron.PreviousPartialDerivate = nodeDelta;
+                        neuron.PreviousPartialDerivate = sumPartial;
 
                         synapse.UpdateWeight(_learningRate, -delta);
                     }

@@ -12,55 +12,45 @@ namespace SSI
 {
     class NetworkHandler
     {
-
+        //UWAGA sieć niestety ma jakąś usterke przez co potrafi rozpoznać tylko jednego irysa na raz, metody jednak 
+        //i sposób myślenia jest dobry, winny jest pewnie algorytm wstecznej propagacji ale od pięciu dni nie 
+        //potrafie znaleść przyczyny. 
         public static void NewNetwork()
         {
-            Network network = new Network(1,1,1,1);
+            Network network = new Network(4,3,3,3);
             ReadData rd = new ReadData();
             rd.ReadFlower();
-            //rd.PrintData();
+            rd.PrintData();
             double[][] data = rd.GetData();
             var trainDataSet = GetTrainData(data);
             var expectedOutput = ExpectedValVektor(data);
 
-
-            //network.PushInputValues(new double[4] { 0.18, 0.03, 0.5, 0.4 });
-            //network.PushInputValues(new double[4] { 1, 1, 1,1 });
             for (int j = 0; j < 1; j++)
             {
-                //network.Train(new double[4] { 0.1, 0.5, 0.3, 0.8 }, new double[3] { 0.1, 0.5, 0.9 });
-                network.Train(new double[1] { 0.5 }, new double[1] { 1 });
+                for (int i = 0; i < 150; i++)
+                {
+                    network.Train(trainDataSet[i], expectedOutput[i]);
+                }
+
             }
 
+            //100
+            network.PushInputValuesInConsole(new double[4] { 0.85, 0.38, 0.66, 0.29 });
+            network.PushInputValuesInConsole(new double[4] { 0.80, 0.32, 0.63, 0.24 });
+            network.PushInputValuesInConsole(new double[4] { 0.82, 0.38, 0.66, 0.25 });
+
+
+            //010
+            network.PushInputValuesInConsole(new double[4] { 0.71, 0.38, 0.57, 0.19 });
+            network.PushInputValuesInConsole(new double[4] { 0.73, 0.34, 0.52, 0.13 });
+            network.PushInputValuesInConsole(new double[4] { 0.78, 0.28, 0.57, 0.19 });
+
+            //001
+            network.PushInputValuesInConsole(new double[4] { 0.62, 0.38, 0.18, 0.03 });
+            network.PushInputValuesInConsole(new double[4] { 0.59, 0.41, 0.16, 0.03 });
+            network.PushInputValuesInConsole(new double[4] { 0.58, 0.39, 0.19, 0.03 });
 
             network.PrintNetwork();
-
-            //network.Train(trainDataSet[0], expectedOutput[0]);
-
-            //for (int j = 0; j < 1; j++)
-            //{
-            //    for (int i = 0; i < 150; i++)
-            //    {
-            //        network.Train(trainDataSet[i], expectedOutput[i]);
-            //    }
-
-            //}
-            /*
-            Console.WriteLine("Pierwszy");
-            network.PushInputValues(new double[2] { 0.18, 0.03 });
-            network.PushInputValues(new double[2] { 0.20, 0.04 });
-            network.PushInputValues(new double[2] { 0.16, 0.05 });
-
-            Console.WriteLine("Drugi");
-            network.PushInputValues(new double[2] { 0.57, 0.20 });
-            network.PushInputValues(new double[2] { 0.52, 0.16 });
-            network.PushInputValues(new double[2] { 0.42, 0.13 });
-
-            Console.WriteLine("Trzeci");
-            network.PushInputValues(new double[2] { 0.65, 0.23 });
-            network.PushInputValues(new double[2] { 0.66, 0.25 });
-            network.PushInputValues(new double[2] { 0.62, 0.30 });
-            */
         }
 
         static double[][] ExpectedValVektor(double [][] data) 
@@ -73,9 +63,7 @@ namespace SSI
                 for (int j = 0; j < 3; j++)
                 {
                     expectedValues[i][j] = data[i][4+j];
-                    //Console.Write(data[i][4 + j]);
                 }
-                //Console.WriteLine();
             }
 
             return expectedValues;
