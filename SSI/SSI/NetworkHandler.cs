@@ -17,40 +17,40 @@ namespace SSI
         //potrafie znaleść przyczyny. 
         public static void NewNetwork()
         {
-            Network network = new Network(4,3,3,3);
-            ReadData rd = new ReadData();
-            rd.ReadFlower();
-            rd.PrintData();
-            double[][] data = rd.GetData();
-            var trainDataSet = GetTrainData(data);
-            var expectedOutput = ExpectedValVektor(data);
+            //Network network = new Network(4,3,3,3);
+            //ReadData rd = new ReadData();
+            //rd.ReadFlower();
+            //rd.PrintData();
+            //double[][] data = rd.GetData();
+            //var trainDataSet = GetTrainData(data);
+            //var expectedOutput = ExpectedValVektor(data);
 
-            for (int j = 0; j < 1; j++)
-            {
-                for (int i = 0; i < 150; i++)
-                {
-                    network.Train(trainDataSet[i], expectedOutput[i]);
-                }
+            //for (int j = 0; j < 1; j++)
+            //{
+            //    for (int i = 0; i < 150; i++)
+            //    {
+            //        network.Train(trainDataSet[i], expectedOutput[i]);
+            //    }
 
-            }
+            //}
 
-            //100
-            network.PushInputValuesInConsole(new double[4] { 0.85, 0.38, 0.66, 0.29 });
-            network.PushInputValuesInConsole(new double[4] { 0.80, 0.32, 0.63, 0.24 });
-            network.PushInputValuesInConsole(new double[4] { 0.82, 0.38, 0.66, 0.25 });
+            ////100
+            //network.PushInputValuesInConsole(new double[4] { 0.85, 0.38, 0.66, 0.29 });
+            //network.PushInputValuesInConsole(new double[4] { 0.80, 0.32, 0.63, 0.24 });
+            //network.PushInputValuesInConsole(new double[4] { 0.82, 0.38, 0.66, 0.25 });
 
 
-            //010
-            network.PushInputValuesInConsole(new double[4] { 0.71, 0.38, 0.57, 0.19 });
-            network.PushInputValuesInConsole(new double[4] { 0.73, 0.34, 0.52, 0.13 });
-            network.PushInputValuesInConsole(new double[4] { 0.78, 0.28, 0.57, 0.19 });
+            ////010
+            //network.PushInputValuesInConsole(new double[4] { 0.71, 0.38, 0.57, 0.19 });
+            //network.PushInputValuesInConsole(new double[4] { 0.73, 0.34, 0.52, 0.13 });
+            //network.PushInputValuesInConsole(new double[4] { 0.78, 0.28, 0.57, 0.19 });
 
-            //001
-            network.PushInputValuesInConsole(new double[4] { 0.62, 0.38, 0.18, 0.03 });
-            network.PushInputValuesInConsole(new double[4] { 0.59, 0.41, 0.16, 0.03 });
-            network.PushInputValuesInConsole(new double[4] { 0.58, 0.39, 0.19, 0.03 });
+            ////001
+            //network.PushInputValuesInConsole(new double[4] { 0.62, 0.38, 0.18, 0.03 });
+            //network.PushInputValuesInConsole(new double[4] { 0.59, 0.41, 0.16, 0.03 });
+            //network.PushInputValuesInConsole(new double[4] { 0.58, 0.39, 0.19, 0.03 });
 
-            network.PrintNetwork();
+            //network.PrintNetwork();
         }
 
         static double[][] ExpectedValVektor(double [][] data) 

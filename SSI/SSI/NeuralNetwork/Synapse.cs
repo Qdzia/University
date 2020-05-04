@@ -8,29 +8,26 @@ namespace SSI.NeuralNetwork
 {
     class Synapse
     {
-        public Neuron FromNeuron;
-        public Neuron ToNeuron;
-        static Random rnd = new Random();
-
-        public Synapse(Neuron from, Neuron to)
-        {
-            FromNeuron = from;
-            ToNeuron = to;
-            Weight = rnd.NextDouble() - 0.5;
-        }
+        public Neuron To { get; set; }
+        public Neuron From { get; set; }
         public double Weight { get; set; }
-
         public double PreviousWeight { get; set; }
 
-        public void UpdateWeight(double learningRate, double delta)
+        public Synapse(Neuron to, Neuron from,double weight)
         {
-            PreviousWeight = Weight;
-            Weight += learningRate * delta;
+            To = to;
+            From = from;
+            Weight = weight - 0.5;
         }
         public double GetOutput()
         {
-            return FromNeuron.Value;
+            return Weight * From.LastValue;
+        }
+
+        public void UpdateWeight(double learingRate)
+        {
+            PreviousWeight = Weight;
+            Weight = -2.0 * To.LastError * From.LastValue * learingRate;
         }
     }
-
 }

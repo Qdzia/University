@@ -65,11 +65,6 @@
     <Compile Include="IndexAndDistance.cs" />
     <Compile Include="kNN.cs" />
     <Compile Include="NetworkHandler.cs" />
-    <Compile Include="NeuralNetwork\Functions\ArcTanActivationFunction.cs" />
-    <Compile Include="NeuralNetwork\Functions\IActivationFunction.cs" />
-    <Compile Include="NeuralNetwork\Functions\RectifiedActivationFuncion.cs" />
-    <Compile Include="NeuralNetwork\Functions\SigmoidActivationFunction.cs" />
-    <Compile Include="NeuralNetwork\Functions\StepActivationFunction.cs" />
     <Compile Include="NeuralNetwork\Layer.cs" />
     <Compile Include="NeuralNetwork\Network.cs" />
     <Compile Include="NeuralNetwork\Neuron.cs" />

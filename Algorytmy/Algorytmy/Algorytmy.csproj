@@ -61,6 +61,9 @@
     <Compile Include="Mod4\KarpaRabina.cs" />
     <Compile Include="Mod4\KnuthMorrisPratt.cs" />
     <Compile Include="Mod5\CezarCode.cs" />
+    <Compile Include="Mod5\HuffmanCode.cs" />
+    <Compile Include="Mod5\Node.cs" />
+    <Compile Include="Mod5\Shannon.cs" />
     <Compile Include="Mod6\BubbleSort.cs" />
     <Compile Include="Mod6\CountingSort.cs" />
     <Compile Include="Mod6\HeapSort.cs" />
