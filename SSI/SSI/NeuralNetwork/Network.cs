@@ -16,7 +16,7 @@ namespace SSI.NeuralNetwork
         #region Create Network Methods
         public Network(params int[] layersNum)
         {
-            _learningRate = 0.2;
+            _learningRate = 1;
             int len = layersNum.Length;
             if (len > 2)
             {
@@ -102,21 +102,21 @@ namespace SSI.NeuralNetwork
                 //Console.WriteLine($"Neuron[{neuron.ID}] \n");
                 foreach (var synapse in neuron.InputSynapses)
                 {
-                    var nodeDelta = (neuron.Value - expectedOutput[neuron.ID]);
+                    var error = (neuron.Value - expectedOutput[neuron.ID]);
                     var output = neuron.Value;
                     var derivative = output * (1.0 - output);
 
-                    //Console.WriteLine("nodeDelta " + nodeDelta);
+                   // Console.WriteLine("error " + error);
                     //Console.WriteLine("output " + output);
                     //Console.WriteLine("derivative " + derivative);
 
-                    var delta = 2* nodeDelta * synapse.FromNeuron.Value;
+                    var delta = 2* error * synapse.FromNeuron.Value;
                     synapse.UpdateWeight(_learningRate, -delta);
 
                     //Console.WriteLine("delta " + delta);
-                    neuron.PreviousPartialDerivate = nodeDelta;
+                    neuron.PreviousPartialDerivate = error * derivative;
                 }
-               // Console.WriteLine("\n ");
+                //Console.WriteLine("\n ");
             }
         }
         private void HandleHiddenLayers()
@@ -137,16 +137,25 @@ namespace SSI.NeuralNetwork
                             sumPartial += outputSynapse.PreviousWeight * outputSynapse.ToNeuron.PreviousPartialDerivate;
                         }
 
-                        var delta = netInput * sumPartial;
+                        var delta = netInput * 2 * sumPartial * derivative;
 
-                        neuron.PreviousPartialDerivate = sumPartial;
-
+                        neuron.PreviousPartialDerivate = sumPartial * derivative;
                         synapse.UpdateWeight(_learningRate, -delta);
                     }
                 }
             }
         }
         #region Print Network Functions
+
+        public void CheckSynapsesConnection(double value,int layerNum, int neuronNum)
+        {
+            Neuron neuron = _layers[layerNum].Neurons[neuronNum];
+            foreach (Synapse syn in neuron.OutputSynapses)
+            {
+                syn.Weight = value;
+            }
+        
+        }
         public void PrintOutputs()
         {
             foreach (var neuron in _outputLayer.Neurons)

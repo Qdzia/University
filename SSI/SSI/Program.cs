@@ -12,6 +12,9 @@ namespace SSI
         {
 
             NetworkHandler.NewNetwork();
+            //ReadData rd = new ReadData();
+            //rd.ReadFlower();
+
    
             Console.ReadLine();
         }

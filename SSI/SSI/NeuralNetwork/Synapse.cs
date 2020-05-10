@@ -16,7 +16,7 @@ namespace SSI.NeuralNetwork
         {
             FromNeuron = from;
             ToNeuron = to;
-            Weight = rnd.NextDouble() - 0.5;
+            Weight = 0.5;// rnd.NextDouble() - 0.5;
         }
         public double Weight { get; set; }
 
