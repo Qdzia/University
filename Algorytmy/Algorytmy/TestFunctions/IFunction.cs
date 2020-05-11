@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SSI
+namespace Algorytmy.TestFunctions
 {
-    class Program
+    interface IFunction
     {
-        static void Main(string[] args)
-        {
-            Console.ReadLine();
-        }
+        string GetName();
+        double Calculate(double[] input);
+
     }
 }

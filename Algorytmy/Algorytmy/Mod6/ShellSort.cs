@@ -6,9 +6,15 @@ using System.Threading.Tasks;
 
 namespace Algorytmy.Mod6
 {
-    class ShellSort
+    class ShellSort :ISort
     {
-        public void Sort(int[] arr)
+        public string GetName() => "ShellSort";
+        public void PerformSorting(double[] arr, int left, int right)
+        {
+            Sort(arr);
+        }
+
+        public void Sort(double[] arr)
         {
             int n = arr.Length;
 
@@ -16,7 +22,7 @@ namespace Algorytmy.Mod6
             {
                 for (int i = gap; i < n; i += 1)
                 {
-                    int temp = arr[i];
+                    double temp = arr[i];
 
                     int j;
                     for (j = i; j >= gap && arr[j - gap] > temp; j -= gap)

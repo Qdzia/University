@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SSI.NeuralNetwork.Functions
+namespace Algorytmy.Mod6
 {
-    interface IActivationFunction
+    interface ISort
     {
-        double CalculateOutput(double input);
+        void PerformSorting(double[] arr, int left, int right);
+        string GetName();
     }
 }

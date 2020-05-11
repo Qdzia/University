@@ -4,23 +4,40 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Algorytmy.TestFunctions;
 
 namespace Algorytmy.Mod6
 {
     class Statistic
     {
+        List<ISort> sorts;
+        List<IFunction> testFunctions;
+        public Statistic()
+        {
+            sorts = new List<ISort>();
+            //sorts.Add(new BubbleSort());
+            sorts.Add(new QuickSort());
+            sorts.Add(new HeapSort());
+            sorts.Add(new ShellSort());
+            sorts.Add(new MergeSort());
+            //sorts.Add(new CountingSort());
+
+            testFunctions = new List<IFunction>();
+            testFunctions.Add(new HyperEllipsoid());
+            testFunctions.Add(new Rastragin());
+            testFunctions.Add(new Rosenbrock());
+            testFunctions.Add(new Shubert());
+            testFunctions.Add(new Sphere());
+            testFunctions.Add(new StyblinskiTang());
+            testFunctions.Add(new SumSquares());
+            testFunctions.Add(new Weierstrass());
+
+        }
         public void Analyze()
         {
-
-            //int[] arr2 = (int[])arr.Clone();
-            //int[] arr3 = CreateArr(2000);
-            int[] arr = CreateArr(20000);
-            double[] results =  Time(arr);
-            foreach (double res in results)
-            {
-                Console.WriteLine(res);
-            }
-
+            TestOnFunctions(100);
+            TestOnFunctions(1000);
+            TestOnFunctions(10000);
         }
         int[] CreateArr(int num)
         {
@@ -35,57 +52,42 @@ namespace Algorytmy.Mod6
             }
             return arr;
         }
-
-        double[] Time(int[] arr)
+        void TestOnFunctions(int range)
         {
-            double[] results = new double[6];
-            int n = arr.Length;
-            int max = arr.Max();
-            int min = arr.Min();
+            foreach (var fun in testFunctions)
+            {
+                double[] arr = new double[range];
+                for (int i = 0; i < range; i++)
+                {
+                    arr[i] = fun.Calculate(new double[] { i });
+                }
+                Console.WriteLine($"Testuje {fun.GetName()} na przedziale <0,{range}>" );
+                Time(arr);
+            }
+            
 
-            BubbleSort b = new BubbleSort();
-            QuickSort q = new QuickSort();
-            HeapSort h = new HeapSort();
-            ShellSort s = new ShellSort();
-            MergeSort m = new MergeSort();
-            CountingSort c = new CountingSort();
+        }
+
+        void Time(double[] arr)
+        {
+            int n = arr.Length;
+            //double max = arr.Max();
+            //double min = arr.Min();
+            int left = 0;
+            int right = n - 1;
 
             Console.WriteLine("Licze...");
 
-            var sw = Stopwatch.StartNew();
-            b.Bubble((int[])arr.Clone());
-            sw.Stop();
-            results[0] = sw.ElapsedMilliseconds;
+            foreach (var sorter in sorts)
+            {
+                var sw = Stopwatch.StartNew();
+                sorter.PerformSorting((double[])arr.Clone(),left,right);
+                sw.Stop();
+                Console.WriteLine($"{sorter.GetName()} : {sw.ElapsedMilliseconds}");
+            }
 
-            sw.Restart();
-            q.Quick((int[])arr.Clone(), 0, n - 1);
-            sw.Stop();
-            results[1] = sw.ElapsedMilliseconds;
-
-            sw.Restart();
-            h.Sort((int[])arr.Clone());
-            sw.Stop();
-            results[2] = sw.ElapsedMilliseconds;
-
-            sw.Restart();
-            s.Sort((int[])arr.Clone());
-            sw.Stop();
-            results[3] = sw.ElapsedMilliseconds;
-
-            sw.Restart();
-            m.Sort((int[])arr.Clone(), 0, n - 1);
-            sw.Stop();
-            results[4] = sw.ElapsedMilliseconds;
-
-            sw.Restart();
-            c.Sort((int[])arr.Clone(), min, max);
-            sw.Stop();
-            results[5] = sw.ElapsedMilliseconds;
-
-            return results;
         }
-
-        
+  
 
     }
 }
