@@ -13,7 +13,7 @@ namespace Algorytmy.Mod6
             int n = arr.Length;
 
             for (int i = n / 2 - 1; i >= 0; i--)
-                heapify(arr, n, i);
+                Heap(arr, n, i);
 
             for (int i = n - 1; i >= 0; i--)
             {
@@ -21,10 +21,10 @@ namespace Algorytmy.Mod6
                 arr[0] = arr[i];
                 arr[i] = temp;
  
-                heapify(arr, i, 0);
+                Heap(arr, i, 0);
             }
         }
-        void heapify(int[] arr, int n, int i)
+        void Heap(int[] arr, int n, int i)
         {
             int largest = i;
             int l = 2 * i + 1;  
@@ -42,7 +42,7 @@ namespace Algorytmy.Mod6
                 arr[i] = arr[largest];
                 arr[largest] = swap;
 
-                heapify(arr, n, largest);
+                Heap(arr, n, largest);
             }
         }
 

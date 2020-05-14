@@ -43,6 +43,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Functions\HyperEllipsoid.cs" />
+    <Compile Include="Functions\IOptiTestFunc.cs" />
+    <Compile Include="Functions\Rastragin.cs" />
+    <Compile Include="Functions\Rosenbrock.cs" />
+    <Compile Include="Functions\Shubert.cs" />
+    <Compile Include="Functions\Sphere.cs" />
+    <Compile Include="Functions\StyblinskiTang.cs" />
+    <Compile Include="Functions\SumSquares.cs" />
+    <Compile Include="Functions\Weierstrass.cs" />
     <Compile Include="Mod1\MaxValue.cs" />
     <Compile Include="Mod1\PolishNotation.cs" />
     <Compile Include="Mod2\ListOneC.cs" />
@@ -71,6 +80,10 @@
     <Compile Include="Mod6\QuickSort.cs" />
     <Compile Include="Mod6\ShellSort.cs" />
     <Compile Include="Mod6\Statistic.cs" />
+    <Compile Include="Mod7\Annelling.cs" />
+    <Compile Include="Mod7\Cuckoo.cs" />
+    <Compile Include="Mod7\Genetic.cs" />
+    <Compile Include="Mod7\Swarm.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
