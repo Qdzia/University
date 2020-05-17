@@ -1,0 +1,80 @@
+﻿<UserControl x:Class="MiniTC.Controls.PanelTC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MiniTC.Controls"
+             xmlns:resx="clr-namespace:MiniTC.Properties"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             mc:Ignorable="d" Background="White"
+             d:DesignHeight="650" d:DesignWidth="300" x:Name="Root">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="5"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="5"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="2" Grid.Column="1" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="60"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0" 
+                   HorizontalAlignment="Right" 
+                   VerticalAlignment="Center" 
+                   Content="{Binding Source={x:Static resx:Resources.DriveLabel}}"/>
+            <ComboBox Grid.Column="1" 
+                      Margin="3" 
+                      ItemsSource="{Binding ElementName=Root, Path=DrivesList}"
+                      SelectedItem="{Binding ElementName=Root, Path=SelectedDrive, Mode=TwoWay}"/>
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.Column="1" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0" 
+                   HorizontalAlignment="Right" 
+                   VerticalAlignment="Center" 
+                   Content="{Binding Source={x:Static resx:Resources.PathLabel}}"/>
+            
+            <TextBlock  Background="LightGray" 
+                        Foreground="DimGray" 
+                        Grid.Column="1" 
+                        Margin="3" 
+                        VerticalAlignment="Center"  
+                        Text="{Binding ElementName=Root, Path=CurrentPath}"/>
+        </Grid>
+
+        <Grid Grid.Row="3" Grid.Column="1" >
+            <ListBox Margin="3"
+                     ItemsSource="{Binding FileList, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:PanelTC}}, Mode=TwoWay}" 
+                     MouseDoubleClick="ListBox_MouseDoubleClick">
+            </ListBox>
+
+
+        </Grid>
+    </Grid>
+</UserControl>
+<!--, RelativeSource={RelativeSource AncestorType={x:Type local:PanelTC}}   CommandParameter="{Binding ElementName=SmallVideoPreviews, Path=SelectedItem}"
+    <TextBlock.InputBindings>
+                                <MouseBinding Gesture="LeftDoubleClick"                                           
+                                  Command="{Binding  ElementName=Root, Path=PanelTC.OpenDirectoryCommand}"/>
+                            </TextBlock.InputBindings>
+    <ListBox.InputBindings>
+                    <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding OpenDirectoryCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:PanelTC}}}"/>
+                </ListBox.InputBindings>
+-->
