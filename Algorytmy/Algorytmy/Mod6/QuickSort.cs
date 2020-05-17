@@ -6,41 +6,46 @@ using System.Threading.Tasks;
 
 namespace Algorytmy.Mod6
 {
-    class QuickSort
+    class QuickSort :ISort
     {
-        int Partition(int[] arr, int low, int high)
+        public string GetName() => "QuickSort";
+        public void PerformSorting(double[] arr, int left, int right)
         {
-            int pivot = arr[high];
+            Quick(arr, left, right);
+        }
+        int Partition(double[] arr, int left, int right)
+        {
+            double pivot = arr[right];
 
-            int i = (low - 1);
-            for (int j = low; j < high; j++)
+            int i = (left - 1);
+            for (int j = left; j < right; j++)
             {
                 if (arr[j] < pivot)
                 {
                     i++;
-                    int temp = arr[i];
+                    double temp = arr[i];
                     arr[i] = arr[j];
                     arr[j] = temp;
                 }
             }
 
-            int temp1 = arr[i + 1];
-            arr[i + 1] = arr[high];
-            arr[high] = temp1;
+            double temp1 = arr[i + 1];
+            arr[i + 1] = arr[right];
+            arr[right] = temp1;
 
             return i + 1;
         }
 
-        public void Quick(int[] arr, int low, int high)
+        public void Quick(double[] arr, int left, int right)
         {
-            if (low < high)
+            if (left < right)
             {
-                int pi = Partition(arr, low, high);
+                int pi = Partition(arr, left, right);
 
-                Quick(arr, low, pi - 1);
-                Quick(arr, pi + 1, high);
+                Quick(arr, left, pi - 1);
+                Quick(arr, pi + 1, right);
             }
         }
-
+        
     }
 }

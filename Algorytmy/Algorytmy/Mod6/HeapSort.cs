@@ -6,25 +6,30 @@ using System.Threading.Tasks;
 
 namespace Algorytmy.Mod6
 {
-    class HeapSort
+    class HeapSort : ISort
     {
-        public void Sort(int[] arr)
+        public string GetName() => "HeapSort";
+        public void PerformSorting(double[] arr, int left, int right)
+        {
+            Sort(arr);
+        }
+        public void Sort(double[] arr)
         {
             int n = arr.Length;
 
             for (int i = n / 2 - 1; i >= 0; i--)
-                Heap(arr, n, i);
+                heapify(arr, n, i);
 
             for (int i = n - 1; i >= 0; i--)
             {
-                int temp = arr[0];
+                double temp = arr[0];
                 arr[0] = arr[i];
                 arr[i] = temp;
  
-                Heap(arr, i, 0);
+                heapify(arr, i, 0);
             }
         }
-        void Heap(int[] arr, int n, int i)
+        void heapify(double[] arr, int n, int i)
         {
             int largest = i;
             int l = 2 * i + 1;  
@@ -38,11 +43,11 @@ namespace Algorytmy.Mod6
 
             if (largest != i)
             {
-                int swap = arr[i];
+                double swap = arr[i];
                 arr[i] = arr[largest];
                 arr[largest] = swap;
 
-                Heap(arr, n, largest);
+                heapify(arr, n, largest);
             }
         }
 

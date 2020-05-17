@@ -1,16 +1,12 @@
 using System;
 
-namespace Algorithms.Tests
+namespace Algorytmy.TestFunctions
 {
-    public class Shubert : IOptiTestFunc
+    public class Shubert : IFunction
     {
-        public double MinimumValue { get { return -186.7; } }
+        public string GetName() => "Shubert";
 
-
-        private double[] searchSpace = new double[2] { -10.0, 10.0 };
-        public double[] SearchSpace { get { return searchSpace; } }
-
-        public double Func(double[] input)
+        public double Calculate(double[] input)
         {
             double result = 1;
             for (int i = 0; i < input.Length; i++)

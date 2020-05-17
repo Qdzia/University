@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Algorytmy.Mod5;
-using Algorytmy.Mod3;
-using Algorytmy.Mod4;
+using Algorytmy.Mod6;
+using Algorytmy.Mod7;
 using System.Collections;
+using Algorytmy.TestFunctions;
 
 namespace Algorytmy
 {
@@ -14,17 +15,10 @@ namespace Algorytmy
     {
         static void Main(string[] args)
         {
-            HuffmanCode hmc = new HuffmanCode();
-            string massage = "ala ma kota"; 
-            massage = hmc.Code(massage).ToString();
-            Console.WriteLine(massage);
-            massage = hmc.Decode(new BitArray(massage.Select(c => c == '1').ToArray()));
-            Console.WriteLine(massage);
+            Statistic st = new Statistic();
 
-            // BoyerMoore.Search("abcd", "abcdabxabcd");
-            //Console.WriteLine(KarpaRabina.Search("abcd", "abcabxabcd"));
+            st.Analyze();
 
-            //Console.WriteLine(KnuthMorrisPratt.Search("abcd","abcabxabcd"));
             Console.ReadLine();
         }
     }

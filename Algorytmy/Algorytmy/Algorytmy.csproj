@@ -43,15 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Functions\HyperEllipsoid.cs" />
-    <Compile Include="Functions\IOptiTestFunc.cs" />
-    <Compile Include="Functions\Rastragin.cs" />
-    <Compile Include="Functions\Rosenbrock.cs" />
-    <Compile Include="Functions\Shubert.cs" />
-    <Compile Include="Functions\Sphere.cs" />
-    <Compile Include="Functions\StyblinskiTang.cs" />
-    <Compile Include="Functions\SumSquares.cs" />
-    <Compile Include="Functions\Weierstrass.cs" />
     <Compile Include="Mod1\MaxValue.cs" />
     <Compile Include="Mod1\PolishNotation.cs" />
     <Compile Include="Mod2\ListOneC.cs" />
@@ -76,16 +67,30 @@
     <Compile Include="Mod6\BubbleSort.cs" />
     <Compile Include="Mod6\CountingSort.cs" />
     <Compile Include="Mod6\HeapSort.cs" />
+    <Compile Include="Mod6\ISort.cs" />
     <Compile Include="Mod6\MergeSort.cs" />
     <Compile Include="Mod6\QuickSort.cs" />
     <Compile Include="Mod6\ShellSort.cs" />
     <Compile Include="Mod6\Statistic.cs" />
     <Compile Include="Mod7\Annelling.cs" />
     <Compile Include="Mod7\Cuckoo.cs" />
-    <Compile Include="Mod7\Genetic.cs" />
-    <Compile Include="Mod7\Swarm.cs" />
+    <Compile Include="Mod7\FireFly\Firefly.cs" />
+    <Compile Include="Mod7\IOpti.cs" />
+    <Compile Include="Mod7\FireFly\Lift.cs" />
+    <Compile Include="Mod7\Swarm\Molecule.cs" />
+    <Compile Include="Mod7\RandGenerator.cs" />
+    <Compile Include="Mod7\Swarm\Swarm.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestFunctions\HyperEllipsoid.cs" />
+    <Compile Include="TestFunctions\IFunction.cs" />
+    <Compile Include="TestFunctions\Rastragin.cs" />
+    <Compile Include="TestFunctions\Rosenbrock.cs" />
+    <Compile Include="TestFunctions\Shubert.cs" />
+    <Compile Include="TestFunctions\Sphere.cs" />
+    <Compile Include="TestFunctions\StyblinskiTang.cs" />
+    <Compile Include="TestFunctions\SumSquares.cs" />
+    <Compile Include="TestFunctions\Weierstrass.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

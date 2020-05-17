@@ -6,12 +6,17 @@ using System.Threading.Tasks;
 
 namespace Algorytmy.Mod6
 {
-    class MergeSort
+    class MergeSort : ISort
     {
-        private void Merge(int[] input, int left, int middle, int right)
+        public string GetName() => "MergeSort";
+        public void PerformSorting(double[] arr, int left, int right)
         {
-            int[] leftArray = new int[middle - left + 1];
-            int[] rightArray = new int[right - middle];
+            Sort(arr,left,right);
+        }
+        private void Merge(double[] input, int left, int middle, int right)
+        {
+            double[] leftArray = new double[middle - left + 1];
+            double[] rightArray = new double[right - middle];
 
             Array.Copy(input, left, leftArray, 0, middle - left + 1);
             Array.Copy(input, middle + 1, rightArray, 0, right - middle);
@@ -43,17 +48,18 @@ namespace Algorytmy.Mod6
             }
         }
 
-        public void Sort(int[] input, int left, int right)
+        public void Sort(double[] arr, int left, int right)
         {
             if (left < right)
             {
                 int middle = (left + right) / 2;
 
-                Sort(input, left, middle);
-                Sort(input, middle + 1, right);
+                Sort(arr, left, middle);
+                Sort(arr, middle + 1, right);
 
-                Merge(input, left, middle, right);
+                Merge(arr, left, middle, right);
             }
         }
+
     }
 }

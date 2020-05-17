@@ -6,18 +6,24 @@ using System.Threading.Tasks;
 
 namespace Algorytmy.Mod6
 {
-    class CountingSort
+    class CountingSort : ISort
     {
-        public void Sort(int[] data, int min, int max)
+        public string GetName() => "CountingSort";
+        public void PerformSorting(double[] arr, int left, int right)
         {
-            int[] count = new int[max - min + 1];
+            Sort(arr, left, right);
+        }
+
+        public void Sort(double[] data, int min, int max)
+        {
+            double[] count = new double[max - min + 1];
             int z = 0;
 
             for (int i = 0; i < count.Length; i++)
                 count[i] = 0;
 
             for (int i = 0; i < data.Length; i++)
-                count[data[i] - min]++;
+                count[(int)data[i] - min]++;
 
             for (int i = min; i <= max; i++)
             {
