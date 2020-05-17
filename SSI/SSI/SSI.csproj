@@ -44,31 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ANN\ActivationFunctions\IActivationFunction.cs" />
-    <Compile Include="ANN\ActivationFunctions\RectifiedActivationFuncion.cs" />
-    <Compile Include="ANN\ActivationFunctions\SigmoidActivationFunction.cs" />
-    <Compile Include="ANN\ActivationFunctions\StepActivationFunction.cs" />
-    <Compile Include="ANN\InputFunctions\IInputFunction.cs" />
-    <Compile Include="ANN\InputFunctions\WeightedSumFunction.cs" />
-    <Compile Include="ANN\NeuralLayer.cs" />
-    <Compile Include="ANN\NeuralLayerFactory.cs" />
-    <Compile Include="ANN\Neuron\INeuron.cs" />
-    <Compile Include="ANN\Neuron\Neuron.cs" />
-    <Compile Include="ANN\SimpleNeuralNetwork.cs" />
-    <Compile Include="ANN\Synapses\InputSynapse.cs" />
-    <Compile Include="ANN\Synapses\ISynapse.cs" />
-    <Compile Include="ANN\Synapses\Synapse.cs" />
     <Compile Include="Bayes.cs" />
     <Compile Include="FuzzyLogic.cs" />
     <Compile Include="FuzzyRule.cs" />
     <Compile Include="Graphic.cs" />
     <Compile Include="IndexAndDistance.cs" />
     <Compile Include="kNN.cs" />
-    <Compile Include="NetworkHandler.cs" />
-    <Compile Include="NeuralNetwork\Layer.cs" />
-    <Compile Include="NeuralNetwork\Network.cs" />
-    <Compile Include="NeuralNetwork\Neuron.cs" />
-    <Compile Include="NeuralNetwork\Synapse.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReadData.cs" />

@@ -9,115 +9,79 @@ namespace Algorytmy.Mod5
 {
     class HuffmanCode
     {
-        private List<Node> nodes = new List<Node>();
         public Node Root { get; set; }
-        public Dictionary<char, int> SymbolFrequency = new Dictionary<char, int>();
+        public Dictionary<char, int> FrequencyOfSym = new Dictionary<char, int>();
+        private List<Node> nodes = new List<Node>();
 
-        public void BuildTree(string text)
+        public void TestFun(string massage)
         {
-            //Create Dictionary 
-            for (int i = 0; i < text.Length; i++)
+            BuildTree(massage);
+            var m = Code(massage);
+            string decodeMassage = Decode(m);
+            Console.WriteLine(decodeMassage);
+        }
+        public bool Leaf(Node node) => (node.Left == null && node.Right == null);
+        public void BuildTree(string str)
+        {
+            for (int i = 0; i < str.Length; i++)
             {
-                //Add new symbol
-                if (!SymbolFrequency.ContainsKey(text[i]))
-                    SymbolFrequency.Add(text[i], 0);
-
-                SymbolFrequency[text[i]]++;
+                if (!FrequencyOfSym.ContainsKey(str[i])) FrequencyOfSym.Add(str[i], 0);
+                FrequencyOfSym[str[i]]++;
             }
 
-            //Add nodes with value
-            foreach (KeyValuePair<char, int> symbol in SymbolFrequency)
+            foreach (KeyValuePair<char, int> symbol in FrequencyOfSym)
             {
                 nodes.Add(new Node() { Symbol = symbol.Key, ValueFreq = symbol.Value });
             }
 
             while (nodes.Count >= 2)
             {
-                //Sort by Value
-                List<Node> sortedNodes = nodes.OrderBy(node => node.ValueFreq).ToList<Node>();
+                List<Node> sorted = nodes.OrderBy(node => node.ValueFreq).ToList<Node>();
 
-                if (sortedNodes.Count >= 2)
+                if (sorted.Count >= 2)
                 {
-                    //Take 2 items 
-                    List<Node> take = sortedNodes.Take(2).ToList<Node>();
+                    List<Node> curr = sorted.Take(2).ToList<Node>();
+                    Node parent = new Node() { Symbol = '*', ValueFreq = curr[0].ValueFreq + curr[1].ValueFreq, Left = curr[0], Right = curr[1]};
 
-                    //Create parent with sum Value 
-                    Node parent = new Node()
-                    {
-                        Symbol = '*',
-                        ValueFreq = take[0].ValueFreq + take[1].ValueFreq,
-                        Left = take[0],
-                        Right = take[1]
-                    };
-
-                    //Remove child and add parents
-                    nodes.Remove(take[0]);
-                    nodes.Remove(take[1]);
+                    nodes.Remove(curr[0]);
+                    nodes.Remove(curr[1]);
                     nodes.Add(parent);
-
                 }
             }
-
             this.Root = nodes.FirstOrDefault();
         }
 
-        public BitArray Code(string text)
+        public List<bool> Code(string str)
         {
-            List<bool> encodeText = new List<bool>();
+            List<bool> codded = new List<bool>();
 
-            for (int i = 0; i < text.Length; i++)
+            for (int i = 0; i < str.Length; i++)
             {
-                List<bool> encodeSymbol = this.Root.Tree(text[i], new List<bool>());
+                List<bool> coddedSymb = this.Root.Tree(str[i], new List<bool>());
+                codded.AddRange(coddedSymb);
 
-                encodeText.AddRange(encodeSymbol);
-
-                Console.Write($"Symbol : {text[i]}  Encoded : ");
-
-                foreach (bool bit in new BitArray(encodeSymbol.ToArray()))
+                Console.Write($"LITERA -> {str[i]}  KOD: ");
+                foreach (bool value in coddedSymb)
                 {
-                    Console.Write(bit);
+                    if(value) Console.Write("1");
+                    else Console.Write("0");
                 }
                 Console.WriteLine();
             }
-
-            BitArray bits = new BitArray(encodeText.ToArray());
-
-            return bits;
+            return codded;
         }
 
-        public string Decode(BitArray bits)
+        public string Decode(List<bool> massage)
         {
-            string decode = "";
+            string output = "";
             Node curr = this.Root;
-
-
-            foreach (bool bit in bits)
+            foreach (bool value in massage)
             {
-                if (bit)
-                {
-                    if (curr.Right != null)
-                        curr = curr.Right;
-                }
-                else
-                {
-                    if (curr.Left != null)
-                        curr = curr.Left;
-                }
-
-                if (Leaf(curr))
-                {
-                    decode += curr.Symbol;
-                    curr = this.Root;
-                }
-
+                if (value) { if (curr.Right != null) curr = curr.Right; }
+                else { if (curr.Left != null) curr = curr.Left; }
+                if (Leaf(curr)) { output += curr.Symbol; curr = this.Root;}
             }
-            return decode;
-        }
-
-        public bool Leaf(Node node)
-        {
-
-            return (node.Left == null && node.Right == null);
+            return output;
         }
     }
 }

@@ -8,6 +8,7 @@ using Algorytmy.Mod6;
 using Algorytmy.Mod7;
 using System.Collections;
 using Algorytmy.TestFunctions;
+using System.Collections;
 
 namespace Algorytmy
 {
@@ -15,9 +16,11 @@ namespace Algorytmy
     {
         static void Main(string[] args)
         {
-            Statistic st = new Statistic();
+            Statistic stat = new Statistic();
 
-            st.Analyze();
+            stat.Analyze();
+            // BoyerMoore.Search("abcd", "abcdabxabcd");
+            //Console.WriteLine(KarpaRabina.Search("abcd", "abcabxabcd"));
 
             Console.ReadLine();
         }

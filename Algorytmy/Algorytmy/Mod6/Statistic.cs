@@ -15,7 +15,7 @@ namespace Algorytmy.Mod6
         public Statistic()
         {
             sorts = new List<ISort>();
-            sorts.Add(new BubbleSort());
+            //sorts.Add(new BubbleSort());
             sorts.Add(new QuickSort());
             sorts.Add(new HeapSort());
             sorts.Add(new ShellSort());
@@ -53,12 +53,16 @@ namespace Algorytmy.Mod6
                 Time(arr);
             } 
 
-        }
+        } 
         void Time(double[] arr)
         {
             int n = arr.Length;
+            //double max = arr.Max();
+            //double min = arr.Min();
             int left = 0;
             int right = n - 1;
+
+            Console.WriteLine("Licze...");
 
             foreach (var sorter in sorts)
             {

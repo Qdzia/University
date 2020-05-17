@@ -69,10 +69,10 @@ namespace SSI
         void Normalize()
         {   
             int n = data.Length;
-            double max = 0;
-            double min = 0;
             for (int j = 0; j < 4; j++)
             {
+                double max = 0;
+                double min = 0;
                 for (int k = 0; k < n; k++)
                 {
                     if (max < data[k][j]) max = data[k][j];
