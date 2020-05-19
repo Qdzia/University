@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace MiniTC.Controls
 {
-    /// <summary>
-    /// Interaction logic for PanelTC.xaml
-    /// </summary>
     public partial class PanelTC : UserControl
     {
         public PanelTC()

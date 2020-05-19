@@ -1,5 +1,4 @@
 ﻿using MiniTC.Base;
-using MiniTC.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,21 +10,23 @@ namespace MiniTC.ViewModels
 {
     class MainViewModel: BaseVM
     {
-        private PanelTCModel _from;
-        private PanelTCModel _to;
+        //UWAGA : Należy klikać z lewej strony listy najlepiej w znak <D> lub .. klikanie z drugiej strony nie zaskutkuje. 
+        //Warto o tym pamiętać potrafi oszczędzić bardzo dużo czasu!
+        private PanelTCViewModel _from;
+        private PanelTCViewModel _to;
         public RelayCommand CopyCommand { get; set; }
         public MainViewModel()
         {
-            From = new PanelTCModel();
-            To = new PanelTCModel();
+            From = new PanelTCViewModel();
+            To = new PanelTCViewModel();
             CopyCommand = new RelayCommand(CopyFile);
         }
-        public PanelTCModel From
+        public PanelTCViewModel From
         {
             get { return _from; }
             set { SetProperty(ref _from, value); }
         }
-        public PanelTCModel To
+        public PanelTCViewModel To
         {
             get { return _to; }
             set { SetProperty(ref _to, value); }

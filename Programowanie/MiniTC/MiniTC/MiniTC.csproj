@@ -61,11 +61,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\IPanelTC.cs" />
     <Compile Include="Controls\PanelTC.xaml.cs">
       <DependentUpon>PanelTC.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\PanelTCModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\PanelTCViewModel.cs" />
     <Page Include="Controls\PanelTC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -7,10 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using MiniTC.Base;
+using MiniTC.Controls;
 
-namespace MiniTC.Models
+namespace MiniTC.ViewModels
 {
-    class PanelTCModel : BaseVM
+    class PanelTCViewModel : BaseVM, IPanelTC
     {
         #region Własności
         private List<string> _files;
@@ -24,7 +25,7 @@ namespace MiniTC.Models
         {
             get
             {
-                if (_changeDirCommand == null){ _changeDirCommand = new RelayCommand(GoToDirectory);}
+                if (_changeDirCommand == null) { _changeDirCommand = new RelayCommand(GoToDirectory); }
                 return _changeDirCommand;
             }
         }
@@ -54,7 +55,7 @@ namespace MiniTC.Models
             set { SetProperty(ref _selectedFile, value); }
         }
         #endregion
-        public PanelTCModel()
+        public PanelTCViewModel()
         {
             Drives = new List<string>();
             UpdateLogicalDrives();
@@ -117,6 +118,5 @@ namespace MiniTC.Models
 
             File.Copy(sourcePath, destinationPath);
         }
-
     }
 }
