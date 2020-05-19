@@ -60,16 +60,54 @@
         </Grid>
 
         <Grid Grid.Row="3" Grid.Column="1" >
-            <ListBox Margin="3"
-                     ItemsSource="{Binding FileList, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:PanelTC}}, Mode=TwoWay}" 
-                     MouseDoubleClick="ListBox_MouseDoubleClick">
+            <ListBox Grid.Row="2" Margin="3"
+                 ItemsSource="{Binding ElementName=Root, Path=FileList}"
+                 SelectedItem="{Binding ElementName=Root, Path=SelectedFile, Mode=TwoWay}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <ContentControl>
+                                <TextBlock Text="{Binding Mode=OneWay}"/>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseDoubleClick">
+                                        <i:InvokeCommandAction Command="{Binding ElementName=Root , Path=OpenDirCommand}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ContentControl>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
             </ListBox>
 
 
         </Grid>
     </Grid>
 </UserControl>
-<!--, RelativeSource={RelativeSource AncestorType={x:Type local:PanelTC}}   CommandParameter="{Binding ElementName=SmallVideoPreviews, Path=SelectedItem}"
+<!--
+    <ListBox Margin="3"
+                     ItemsSource="{Binding FileList, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:PanelTC}}, Mode=TwoWay}"
+                     SelectedItem="{Binding SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:PanelTC}}, Mode=TwoWay}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <ContentControl>
+                                <TextBlock Text="{Binding Mode=OneWay}">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="MouseDoubleClick">
+                                            <i:InvokeCommandAction Command="{Binding  ElementName=Root, Path=OpenDirectoryCommand}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </TextBlock>
+                            </ContentControl>
+                        </Grid>
+                    </DataTemplate>
+                    
+                </ListBox.ItemTemplate>
+            </ListBox>
+    
+    
+    
+    , RelativeSource={RelativeSource AncestorType={x:Type local:PanelTC}}   CommandParameter="{Binding ElementName=SmallVideoPreviews, Path=SelectedItem}"
     <TextBlock.InputBindings>
                                 <MouseBinding Gesture="LeftDoubleClick"                                           
                                   Command="{Binding  ElementName=Root, Path=PanelTC.OpenDirectoryCommand}"/>

@@ -24,13 +24,15 @@ namespace MiniTC.Controls
         {
             InitializeComponent();
         }
-        public ICommand OpenDirectoryCommand
+        public static readonly DependencyProperty OpenDirectoryCommandProperty =
+            DependencyProperty.Register("OpenDirCommand", typeof(ICommand),
+                typeof(PanelTC), new PropertyMetadata(null));
+
+        public ICommand OpenDirCommand
         {
             get { return (ICommand)GetValue(OpenDirectoryCommandProperty); }
             set { SetValue(OpenDirectoryCommandProperty, value); }
         }
-        public static readonly DependencyProperty OpenDirectoryCommandProperty =
-            DependencyProperty.Register("OpenDirectoryCommand", typeof(ICommand), typeof(PanelTC), new PropertyMetadata(null));
         public string CurrentPath
         {
             get { return (string)GetValue(CurrentPathProperty); }
@@ -67,28 +69,15 @@ namespace MiniTC.Controls
         public static readonly DependencyProperty FileListProperty =
             DependencyProperty.Register("FileList", typeof(List<string>), typeof(PanelTC), new PropertyMetadata(null));
 
-        //public int SelectedItemIndex
-        //{
-        //    get { return (int)GetValue(SelectedItemIndexProperty); }
-        //    set { SetValue(SelectedItemIndexProperty, value); }
-        //}
 
-        //public static readonly DependencyProperty SelectedItemIndexProperty =
-        //    DependencyProperty.Register("SelectedItemIndex", typeof(int), typeof(PanelTC), new PropertyMetadata(""));
+        public static readonly DependencyProperty SelectedFileProperty =
+            DependencyProperty.Register("SelectedFile", typeof(string),
+                typeof(PanelTC), new PropertyMetadata(""));
 
-        public string ChangeDirectory
+        public string SelectedFile
         {
-            get { return (string)GetValue(ChangeDirectoryProperty); }
-            set { SetValue(ChangeDirectoryProperty, value); }
-        }
-
-        public static readonly DependencyProperty ChangeDirectoryProperty =
-            DependencyProperty.Register("ChangeDirectory", typeof(string), typeof(PanelTC), new PropertyMetadata(""));
-
-
-        private void ListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            ChangeDirectory = "1";
+            get { return (string)GetValue(SelectedFileProperty); }
+            set { SetValue(SelectedFileProperty, value); }
         }
     }
 }

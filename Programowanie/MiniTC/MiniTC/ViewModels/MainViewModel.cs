@@ -13,10 +13,12 @@ namespace MiniTC.ViewModels
     {
         private PanelTCModel _from;
         private PanelTCModel _to;
+        public RelayCommand CopyCommand { get; set; }
         public MainViewModel()
         {
             From = new PanelTCModel();
             To = new PanelTCModel();
+            CopyCommand = new RelayCommand(CopyFile);
         }
         public PanelTCModel From
         {
@@ -29,14 +31,10 @@ namespace MiniTC.ViewModels
             set { SetProperty(ref _to, value); }
         }
 
-        public void CopyFile(string sourcePath, string destinationPath)
+        public void CopyFile()
         {
-            //try
-            //{
-            //    File.Copy(sourcePath, destinationPath);
-            //}
-            //catch (Exception) {throw;}
-
+            From.CopyTo(To.Path);
+            To.UpdateDirectoryContent();
         }
 
     }

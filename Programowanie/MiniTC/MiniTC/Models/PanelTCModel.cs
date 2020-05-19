@@ -5,23 +5,28 @@ using System.Linq;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using MiniTC.Base;
 
 namespace MiniTC.Models
 {
     class PanelTCModel : BaseVM
     {
+        #region Własności
         private List<string> _files;
         private List<string> _drives;
         private string _selectedDrive;
         private string _path;
-        private RelayCommand _goToDirCommand;
-        private string _changeDirectory;
+        private string _selectedFile;
+        private ICommand _changeDirCommand = null;
 
-        public RelayCommand GoToDirCommand
+        public ICommand ChangeDirCommand
         {
-            get { return _goToDirCommand; }
-            set { SetProperty(ref _goToDirCommand, value); }
+            get
+            {
+                if (_changeDirCommand == null){ _changeDirCommand = new RelayCommand(GoToDirectory);}
+                return _changeDirCommand;
+            }
         }
         public List<string> Files
         {
@@ -43,33 +48,29 @@ namespace MiniTC.Models
             get { return _path; }
             set { SetProperty(ref _path, value); }
         }
-        public string ChangeDirectory
+        public string SelectedFile
         {
-            get { return _changeDirectory; }
-            set { SetProperty(ref _changeDirectory, value); GoToDirectory(Files[0]); }
+            get { return _selectedFile; }
+            set { SetProperty(ref _selectedFile, value); }
         }
+        #endregion
         public PanelTCModel()
         {
-            GoToDirCommand = new RelayCommand(GoTo);
-            Files = new List<string>();
             Drives = new List<string>();
             UpdateLogicalDrives();
-            SelectedDrive = Drives[1];
-            //GoToDirectory(Files[7]);
-            //GoToDirectory(Files[1]);
-
+            SelectedDrive = Drives[0];
         }
 
         public void UpdateDirectoryContent()
         {
             Files = new List<string>();
-            Files.Add("..");
-            Directory.GetDirectories(Path).ToList().ForEach(x => Files.Add("<D>" + x));
+            if (Path.Length >= 4) Files.Add("..");
+            Directory.GetDirectories(Path).ToList().ForEach(x => Files.Add("<D> " + x));
             Directory.GetFiles(Path).ToList().ForEach(x => Files.Add(x));
             for (int i = 1; i < Files.Count; i++)
             {
                 string[] ar = Files[i].Split('\\');
-                if (Files[i].Contains("<D>")) Files[i] = "<D>" + ar.Last();
+                if (Files[i].Contains("<D> ")) Files[i] = "<D> " + ar.Last();
                 else Files[i] = ar.Last();
             }
         }
@@ -78,35 +79,43 @@ namespace MiniTC.Models
         {
             Drives.Clear();
             Directory.GetLogicalDrives().ToList().ForEach(x => Drives.Add(x));
-
         }
         public void OnDriveChange()
         {
             Path = SelectedDrive;
             UpdateDirectoryContent();
         }
-        public void GoToDirectory(string directory)
+        public void GoToDirectory()
         {
+            string directory = SelectedFile;
             if (directory == "..")
             {
                 string[] toDelete = Path.Split('\\');
-                Path = Path.Replace('\\' + toDelete.Last(), "");
+                Path = Path.Replace(toDelete.Last(), "");
+                var str = Path.Last();
+                if (str == '\\' && Path.Length >= 4) Path = Path.Remove(Path.Length - 1);
                 UpdateDirectoryContent();
             }
-            if (directory.Contains("<D>"))
+            if (directory.Contains("<D> "))
             {
-                directory = directory.Replace("<D>", "");
+                directory = directory.Replace("<D> ", "");
                 if (Path.Length >= 4) Path += '\\' + directory;
                 else Path += directory;
                 UpdateDirectoryContent();
             }
         }
 
-        public void GoTo()
+        public void CopyTo(string destinationPath)
         {
-            Path = @"D:\BackUp";
-            UpdateDirectoryContent();
+            if (SelectedFile == null || SelectedFile.Contains("<D> ") || SelectedFile == "..") return;
+            string sourcePath;
+            if (Path.Last() == '\\') sourcePath = Path + SelectedFile;
+            else sourcePath = Path + "\\" + SelectedFile;
 
+            if (destinationPath.Last() == '\\') destinationPath += SelectedFile;
+            else destinationPath += "\\" + SelectedFile;
+
+            File.Copy(sourcePath, destinationPath);
         }
 
     }
