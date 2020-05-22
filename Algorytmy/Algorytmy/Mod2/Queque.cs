@@ -72,7 +72,7 @@ namespace Algorytmy.Mod2
         public void Print()
         {
             for (int i = first; i <= last; i++)
-                Console.WriteLine(tab[i]);
+                Console.Write(tab[i]  + " " );
         }
 
         public bool isEmpty()

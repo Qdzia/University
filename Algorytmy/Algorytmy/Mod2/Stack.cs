@@ -12,7 +12,7 @@ namespace Algorytmy.Mod2
         int last;
         int size;
 
-        Stack(int s)
+        public Stack(int s)
         {
             tab = new int[s];
             last = -1;

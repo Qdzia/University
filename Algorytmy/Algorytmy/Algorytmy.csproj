@@ -49,6 +49,7 @@
     <Compile Include="Mod2\ListOne.cs" />
     <Compile Include="Mod2\ListTwoF.cs" />
     <Compile Include="Mod2\ListTwo.cs" />
+    <Compile Include="Mod2\Mod2Test.cs" />
     <Compile Include="Mod2\Node.cs" />
     <Compile Include="Mod2\PQueque.cs" />
     <Compile Include="Mod2\Queque.cs" />
@@ -95,8 +96,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Mod7\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

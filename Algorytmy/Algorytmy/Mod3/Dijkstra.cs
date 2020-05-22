@@ -78,3 +78,19 @@ namespace Algorytmy.Mod3
 
     }
 }
+//BFS bts = new BFS();
+//DFS dfs = new DFS();
+//Dijkstra dijkstra = new Dijkstra();
+//Floyd floyd = new Floyd();
+
+//Console.WriteLine("BTS: ");
+//            bts.Init();
+
+//            Console.WriteLine("DFS: ");
+//            dfs.Init();
+
+//            Console.WriteLine("Dijkstra: ");
+//            dijkstra.Init();
+
+//            Console.WriteLine("Floyd: ");
+//            floyd.Init();

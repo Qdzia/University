@@ -56,10 +56,6 @@ namespace Algorytmy.Mod3
                 if (src == stack.Peek()) stack.Pop();
 
             }
-
-
-
-        
+        }
     }
-}
 }
